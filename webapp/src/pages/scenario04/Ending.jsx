@@ -72,10 +72,17 @@ export function Ending() {
       scenarioId="package"
       clues={signals.map(({ title, text }) => ({ title: t(title), note: t(text) }))}
       quizTo="/scenario04-shopping/quiz"
-      // Unchanged: the route is banked as the player continues to the shared
-      // anti-fraud quiz. This is the page's only flow control - no restart,
-      // and no "go play the other product now" detour out of the ending.
+      // The route is banked either way: `resetShoppingRoute` marks the product
+      // just played as completed and clears the run, so the other product is
+      // what a restart lands on.
       onContinue={resetShoppingRoute}
+      // 體驗另一件商品: this scenario is the only one with two products, and a
+      // visitor only ever lives through one of them. The second exit restarts
+      // the shopping flow at the simulated phone so the next run picks up the
+      // product this one did not.
+      altTo="/scenario04-shopping/phone-home"
+      altLabel={t('體驗另一件商品')}
+      onAlt={resetShoppingRoute}
     />
   );
 }

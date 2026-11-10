@@ -314,10 +314,21 @@ for (const path of outcomePages) {
   }
 }
 
+// Scenario 04 is the one analysis screen with a second way out: that
+// scenario has two products and a visitor only ever lives through one, so its
+// acceptance sheet (AR4-19) asks for 體驗另一件商品 beside the quiz. It is an
+// entry back into the SHOPPING flow, not a backwards exit out of the Outcome
+// flow, which is what the one-CTA rule exists to prevent - so it is named
+// here rather than the rule being dropped.
+const ANALYSIS_SECOND_CTA = {
+  'pages/scenario04/Ending.jsx': '/scenario04-shopping/phone-home',
+};
+
 for (const path of analysisPages) {
-  const targets = [...new Set(routeTargets(path))];
+  const allowedSecond = ANALYSIS_SECOND_CTA[path];
+  const targets = [...new Set(routeTargets(path))].filter((route) => route !== allowedSecond);
   if (targets.length !== 1) {
-    violations.push(`${path}: names ${targets.length} routes (${targets.join(', ') || 'none'}) - an analysis screen has exactly one CTA, into 反詐小測驗`);
+    violations.push(`${path}: names ${targets.length} routes (${targets.join(', ') || 'none'}) - an analysis screen has exactly one CTA, into 反詐小測驗${allowedSecond ? ` (plus ${allowedSecond})` : ''}`);
     continue;
   }
   const [target] = targets;
@@ -361,8 +372,13 @@ for (const path of systemPages) {
   for (const [route, what] of FORBIDDEN_EXITS) {
     if (code.includes(route)) violations.push(`${path}: links to ${route} (${what}) - the Outcome flow only goes forward`);
   }
-  for (const banned of ['restart', 'Restart', '再玩一次', '重新開始', '體驗另一', '完整分析', '五項評估', '個人化分析', '核心教育重點', '進行關鍵判斷']) {
-    if (code.includes(banned)) violations.push(`${path}: contains "${banned}", which the Outcome System does not offer`);
+  // 體驗另一件商品 is offered by exactly one screen, for the reason given at
+  // ANALYSIS_SECOND_CTA. Everywhere else the wording stays banned: the point
+  // of the rule is that an ending never invites a replay of itself.
+  const banned = ['restart', 'Restart', '再玩一次', '重新開始', '體驗另一', '完整分析', '五項評估', '個人化分析', '核心教育重點', '進行關鍵判斷']
+    .filter((word) => !(word === '體驗另一' && path in ANALYSIS_SECOND_CTA));
+  for (const word of banned) {
+    if (code.includes(word)) violations.push(`${path}: contains "${word}", which the Outcome System does not offer`);
   }
 }
 
@@ -399,11 +415,16 @@ for (const [path, source] of sourceByPath) {
 const QUIZ_COMPONENT = 'components/ui/ScenarioFinalDecision.jsx';
 const QUIZ_CSS = 'components/ui/ScenarioFinalDecision.css';
 
+// Four, not five: scenario 04 asks three 是/否 statements instead of one
+// two-option question (AR4-20 on its acceptance sheet), which it renders
+// through its own pages/scenario04/TrueFalseQuiz.jsx. A three-OPTION question
+// would have left its third answer unreachable - the AR Interaction Contract
+// has two gestures - so the shape changed rather than the option count, and
+// the shared component is untouched by it.
 const EXPECTED_QUIZ_PAGES = [
   'pages/scenario01/Quiz.jsx',
   'pages/scenario02/Quiz.jsx',
   'pages/scenario03/Quiz.jsx',
-  'pages/scenario04/Quiz.jsx',
   'pages/scenario05/Quiz.jsx',
 ];
 // Derived the same way the outcome and analysis pages are: by what a page
