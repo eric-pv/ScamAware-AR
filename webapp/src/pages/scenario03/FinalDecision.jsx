@@ -35,21 +35,24 @@ export function FinalDecision() {
     navigate('/scenario03-police/aftermath');
   }
 
-  // 撥打 165 IS the successful anti-fraud judgement - there is no simulated
-  // hotline call in between. Picking up the phone to 165 before the money
-  // moves is the whole point of the branch, so the run is decided here: the
-  // choice and its warning flag are recorded, the ending is marked success,
-  // the scammer's call is dropped and the player goes straight to the
-  // 成功反詐 outcome (and on to 詐騙疑點分析／反詐小測驗 from there).
-  // No dial tone either: nothing here starts a call the player has to sit
-  // through.
+  // 撥打 165 IS the successful anti-fraud judgement: the run is decided here
+  // and nothing that follows can change it - the choice and its warning flag
+  // are recorded, the ending is marked success and the scammer's call is
+  // dropped before the player goes anywhere.
+  //
+  // The hotline itself is then played (Hotline165.jsx) on the way to that
+  // ending. It is not a gate and not a second decision; it is the one place
+  // the scenario says out loud why the call was right - no such case number
+  // in any system, no record of that caller, keep the messages and transfer
+  // records - which the player otherwise never hears. The 成功反詐 outcome,
+  // and 詐騙疑點分析／反詐小測驗 after it, are unchanged.
   function call165() {
     playSound('click');
     recordChoice('final.decision', 'call165', ['called_165']);
     addWarningFlags('called_165');
     updateScenario03State({ ending: 'success' });
     clearActiveCall();
-    navigate('/scenario03-police/ending/success');
+    navigate('/scenario03-police/hotline-165');
   }
 
   const t = getScenario03Strings();
