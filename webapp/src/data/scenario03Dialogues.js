@@ -759,15 +759,15 @@ export const SCENARIO03_DIALOGUES = {
     speakerLabel: { zh: '165 反詐騙諮詢專線', en: '165 Anti-Fraud Hotline', jp: '165 詐欺相談ホットライン' },
     lines: {
       zh: [
-        '您好，這裡是 165 反詐騙諮詢專線。請問您遇到什麼情況？',
+        '您好，這裡是 165 反詐騙諮詢專線。',
         '好的，請先不要轉帳，也不要再依照對方的指示操作。我幫您查一下。',
       ],
       en: [
-        'This is the 165 anti-fraud hotline. What has happened?',
+        'This is the 165 anti-fraud hotline.',
         'All right. Do not transfer anything, and stop following their instructions. Let me check for you.',
       ],
       jp: [
-        'こちらは165詐欺相談ホットラインです。どのような状況でしょうか。',
+        'こちらは165詐欺相談ホットラインです。',
         '分かりました。送金はせず、相手の指示にも従わないでください。確認します。',
       ],
     },
