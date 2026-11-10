@@ -71,6 +71,8 @@ import { localizeLocationName } from '../lib/location/localizedLocationName';
 const AUDIO_BASE_URL = import.meta.env?.BASE_URL ?? '/';
 const POLICE_AUDIO = `${AUDIO_BASE_URL}assets/scenarios/scenario-03/audio/police`;
 const PROSECUTOR_AUDIO = `${AUDIO_BASE_URL}assets/scenarios/scenario-03/audio/prosecutor`;
+// The 165 operator - the one voice here that is not the scam's.
+const HOTLINE_AUDIO = `${AUDIO_BASE_URL}assets/scenarios/scenario-03/audio/hotline`;
 
 // Explicit lookup table (not string concatenation/replace) from an
 // audioKey to the actual filename for each language, so a future language
@@ -101,6 +103,9 @@ export const SCENARIO03_AUDIO_FILES = {
     prosecutorAccountAnswerB: `${PROSECUTOR_AUDIO}/prosecutor_account_answer_b.mp3`,
     prosecutorPressure: `${PROSECUTOR_AUDIO}/prosecutor_pressure.mp3`,
     prosecutorEnd: `${PROSECUTOR_AUDIO}/prosecutor_end.mp3`,
+    hotline165Greeting: `${HOTLINE_AUDIO}/hotline_165_greeting.mp3`,
+    hotline165NoRecord: `${HOTLINE_AUDIO}/hotline_165_no_record.mp3`,
+    hotline165Evidence: `${HOTLINE_AUDIO}/hotline_165_evidence.mp3`,
   },
   en: {
     policeIntro: `${POLICE_AUDIO}/police_intro_en.mp3`,
@@ -124,6 +129,9 @@ export const SCENARIO03_AUDIO_FILES = {
     prosecutorAccountAnswerB: `${PROSECUTOR_AUDIO}/prosecutor_account_answer_b_en.mp3`,
     prosecutorPressure: `${PROSECUTOR_AUDIO}/prosecutor_pressure_en.mp3`,
     prosecutorEnd: `${PROSECUTOR_AUDIO}/prosecutor_end_en.mp3`,
+    hotline165Greeting: `${HOTLINE_AUDIO}/hotline_165_greeting_en.mp3`,
+    hotline165NoRecord: `${HOTLINE_AUDIO}/hotline_165_no_record_en.mp3`,
+    hotline165Evidence: `${HOTLINE_AUDIO}/hotline_165_evidence_en.mp3`,
   },
   jp: {
     policeIntro: `${POLICE_AUDIO}/police_intro_jp.mp3`,
@@ -147,6 +155,9 @@ export const SCENARIO03_AUDIO_FILES = {
     prosecutorAccountAnswerB: `${PROSECUTOR_AUDIO}/prosecutor_account_answer_b_jp.mp3`,
     prosecutorPressure: `${PROSECUTOR_AUDIO}/prosecutor_pressure_jp.mp3`,
     prosecutorEnd: `${PROSECUTOR_AUDIO}/prosecutor_end_jp.mp3`,
+    hotline165Greeting: `${HOTLINE_AUDIO}/hotline_165_greeting_jp.mp3`,
+    hotline165NoRecord: `${HOTLINE_AUDIO}/hotline_165_no_record_jp.mp3`,
+    hotline165Evidence: `${HOTLINE_AUDIO}/hotline_165_evidence_jp.mp3`,
   },
 };
 
@@ -716,6 +727,7 @@ export const SCENARIO03_DIALOGUES = {
   // change.
   hotline_165_greeting: {
     speaker: 'hotline',
+    audioKey: 'hotline165Greeting',
     speakerLabel: { zh: '165 反詐騙諮詢專線', en: '165 Anti-Fraud Hotline', jp: '165 詐欺相談ホットライン' },
     lines: {
       zh: [
@@ -734,6 +746,7 @@ export const SCENARIO03_DIALOGUES = {
   },
   hotline_165_no_record: {
     speaker: 'hotline',
+    audioKey: 'hotline165NoRecord',
     speakerLabel: { zh: '165 反詐騙諮詢專線', en: '165 Anti-Fraud Hotline', jp: '165 詐欺相談ホットライン' },
     lines: {
       zh: [
@@ -752,6 +765,7 @@ export const SCENARIO03_DIALOGUES = {
   },
   hotline_165_evidence: {
     speaker: 'hotline',
+    audioKey: 'hotline165Evidence',
     speakerLabel: { zh: '165 反詐騙諮詢專線', en: '165 Anti-Fraud Hotline', jp: '165 詐欺相談ホットライン' },
     lines: {
       zh: [
