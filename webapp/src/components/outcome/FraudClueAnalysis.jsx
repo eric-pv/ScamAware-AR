@@ -31,20 +31,37 @@ export function FraudClueAnalysis({
   summary,
   quizTo,
   onContinue,
+  // An optional second way out, used only by scenario 04: that run has two
+  // products and only one of them was lived through, so its analysis offers
+  // "體驗另一件商品" beside the quiz. Every other scenario passes neither and
+  // keeps exactly the one CTA it has always had.
+  altTo,
+  altLabel,
+  onAlt,
 }) {
   const strings = outcomeStrings();
   const ledeLines = Array.isArray(lede) ? lede : [lede];
   const navigate = useNavigate();
   const scrollRef = useFitToBox(scenarioId, clues.length, summary, ledeLines.join('\n'));
 
-  useARInteraction({
-    mode: 'single',
-    surfaceId: 'shared/fraud-clue-analysis',
-    action: () => {
-      onContinue?.();
-      navigate(quizTo);
-    },
-  });
+  // However many story actions the screen has, that is its geometry: one CTA
+  // is `single`, two is `dual` in the order they are drawn - LEFT the quiz,
+  // RIGHT the other product.
+  const hasAlt = Boolean(altTo && altLabel);
+  const goQuiz = () => { onContinue?.(); navigate(quizTo); };
+  const goAlt = () => { onAlt?.(); navigate(altTo); };
+  useARInteraction(hasAlt
+    ? {
+      mode: 'dual',
+      surfaceId: 'shared/fraud-clue-analysis',
+      left: goQuiz,
+      right: goAlt,
+    }
+    : {
+      mode: 'single',
+      surfaceId: 'shared/fraud-clue-analysis',
+      action: goQuiz,
+    });
 
   return (
     <main className="cibar-analysis" data-analysis-scenario={scenarioId}>
@@ -65,8 +82,11 @@ export function FraudClueAnalysis({
       </div>
       {/* Same rule as the outcome screen: the CTA is a sibling of the
           scroller, so it is reachable without scrolling first. */}
-      <div className="cibar-analysis-cta-bar">
+      <div className={`cibar-analysis-cta-bar${hasAlt ? ' has-alt' : ''}`}>
         <Link className="cibar-analysis-cta" to={quizTo} onClick={onContinue}>{strings.quizCta}</Link>
+        {hasAlt && (
+          <Link className="cibar-analysis-cta secondary" to={altTo} onClick={onAlt}>{altLabel}</Link>
+        )}
       </div>
     </main>
   );

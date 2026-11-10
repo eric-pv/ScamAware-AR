@@ -1,0 +1,45 @@
+/* 反詐小測驗, scenario 04's three-statement form (TrueFalseQuiz.jsx).
+   Self-contained on purpose: components/ui/ScenarioFinalDecision.css owns
+   every `antifraud-quiz-*`, `quiz-option`, `.correct` and `.wrong` rule in
+   this app, and a second renderer of those names is exactly what the
+   shared-UI ownership check exists to stop. So this file carries its own
+   `tfq-` namespace, and the layout values below are deliberately the same
+   numbers that file uses - the two quizzes must look like one step asked
+   twice, not two different screens. */
+
+.tfq-shell{flex:1;min-height:0;width:100%;display:flex;flex-direction:column;box-sizing:border-box;background:#050b18}
+.tfq-scroll{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;box-sizing:border-box;padding:16px 16px 12px}
+.tfq-card{background:#111b30;color:#f4f8ff;border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:clamp(16px,3.5vh,22px);box-shadow:0 18px 60px rgba(0,0,0,.35)}
+.tfq-card h2{color:#fff;margin:0 0 10px}
+.tfq-back{flex:none;width:calc(100% - 32px);margin:0 16px calc(12px + env(safe-area-inset-bottom));box-sizing:border-box}
+
+.tfq-progress{font-size:var(--fs-caption);color:#c3cfe0;margin:0 0 6px}
+
+/* The statement IS the question, so it carries the weight the two-option
+   quiz gives its question line: the player answers this sentence rather
+   than choosing between two others. */
+.tfq-statement{font-size:var(--fs-body);line-height:1.65;color:#f4f8ff;margin:0 0 14px}
+
+/* 是 / 否 as a fixed [ LEFT | RIGHT ] pair, and no media query - same rule
+   as the two-option quiz: LEFT is 是 and RIGHT is 否 at every width, because
+   that geometry is what the gesture teaching depends on. Labels this short
+   never need to restack. */
+.tfq-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch;margin-top:14px}
+.tfq-answer{appearance:none;min-height:56px;display:flex;align-items:center;justify-content:center;
+  width:100%;min-width:0;border-radius:14px;padding:12px 16px;font-size:var(--fs-body);font-weight:800;
+  cursor:pointer;background:rgba(255,255,255,.08);color:#f4f8ff;border:1px solid rgba(255,255,255,.22)}
+
+.tfq-review{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:10px}
+
+/* Right and wrong read in the same green/red the two-option quiz uses when
+   an answer locks, so a player who has seen one quiz needs no second
+   explanation. A leading rule rather than a fill: three stacked blocks of
+   solid colour would shout over the text they are marking. */
+.tfq-review-item{border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.14);border-left-width:4px}
+.tfq-review-item.is-ok{border-left-color:#31b77a}
+.tfq-review-item.is-no{border-left-color:#ff4d6d}
+
+.tfq-review-statement{font-size:var(--fs-body-sm);line-height:1.6;color:#f4f8ff;margin:0 0 4px}
+.tfq-review-verdict{font-size:var(--fs-caption);font-weight:700;color:#f4f8ff;margin:0 0 4px}
+.tfq-review-why{font-size:var(--fs-caption);color:#c3cfe0;line-height:1.6;margin:0}
