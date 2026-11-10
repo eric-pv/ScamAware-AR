@@ -158,7 +158,7 @@ export function buildBuyerTree(product, lang) {
       buyer(tt('你先回 SafeDeal 看一下好不好？不要還沒確認，就覺得是我沒有付款。')),
     ], choices: [
       { id: 'a', label: tt('沒有官方訂單，也沒有入帳，我先停止交易。'), nextNodeId: 'buyer.exit.endingCaught', awareness: 'noOrderNoPayment' },
-      { id: 'b', label: tt('我再去 SafeDeal 確認一下。'), nextNodeId: 'buyer.s07.toPaymentStatus' },
+      { id: 'b', label: tt('相信對方，去寄件。'), nextNodeId: 'buyer.s07.toPaymentStatus' },
     ]},
     // Going back to SafeDeal is what opens the fake verification detour: the
     // site's own 收款狀態 page, then its "support desk", then the one
@@ -176,8 +176,8 @@ export function buildBuyerTree(product, lang) {
       buyer(tt('我是真的有需要才跟你買的，也一直很有耐心在等。你現在又說要等入帳，我真的不知道還要等多久……')),
       buyer(tt('你不是說今天可以寄嗎？如果你不想賣，也可以直接跟我說，不用讓我一直等。')),
     ], choices: [
-      { id: 'a', label: tt('沒有官方訂單也沒有入帳，先停止交易。'), nextNodeId: 'buyer.exit.endingStopped', statePatch: { shipmentDecision: 'stopped' }, awareness: 'noPaymentReceived' },
-      { id: 'b', label: tt('相信對方，去寄件。'), nextNodeId: 'buyer.s08.toShip', statePatch: { shipmentDecision: 'shipped' } },
+      { id: 'a', label: tt('還沒確認實際入帳，我先不寄件。'), nextNodeId: 'buyer.exit.endingStopped', statePatch: { shipmentDecision: 'stopped' }, awareness: 'noPaymentReceived' },
+      { id: 'b', label: tt('我相信對方，使用黑皮通寄件。'), nextNodeId: 'buyer.s08.toShip', statePatch: { shipmentDecision: 'shipped' } },
     ]},
     { id: 'buyer.exit.endingStopped', redirectTo: '/scenario05-atm/ending-stopped' },
     // Real 黑皮通 logistics from here on - a real courier really does carry a
