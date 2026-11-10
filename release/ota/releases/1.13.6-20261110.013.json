@@ -1,0 +1,12 @@
+{
+  "releaseId": "1.13.6-20261110.013",
+  "version": "1.13.6",
+  "releaseDate": "2026-11-10",
+  "sequence": 13,
+  "gitCommit": "67a343a96a8a72087c501a8a0f2890d68569e994",
+  "sourcePR": 55,
+  "sha256": "04517c039aee2711a6ac07299e84733ccfdb794e1e6cf0782714f0d50e08014a",
+  "sizeBytes": 121829407,
+  "minShellVersion": "1.2.0",
+  "url": "https://github.com/eric-pv/ScamAware-AR/releases/download/web-1.13.6-20261110.013/cibar-web-1.13.6-20261110.013.zip"
+}
