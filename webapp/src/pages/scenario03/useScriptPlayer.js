@@ -32,7 +32,12 @@ export function useScriptPlayer(script, pace = 1, enabled = true) {
   const [choice, setChoice] = useState(null);
   const [log, setLog] = useState([]);
   const [done, setDone] = useState(false);
-  const audio = useScenarioAudio();
+  // 快速節奏 speeds up the recording itself (pace 0.55 -> 1.82x), so a
+  // recorded beat - which ends on the clip's own progress, not on the timer
+  // below - finishes proportionally sooner and its subtitle moves with it.
+  // Without this the two would come apart: the timed fallback would race
+  // ahead while the voice still played at 1x.
+  const audio = useScenarioAudio(pace > 0 ? 1 / pace : 1);
   const { play, stop, pause } = audio;
 
   const advance = useCallback(() => {
