@@ -341,16 +341,44 @@
 .pol-bank-field{display:grid;gap:5px;font-size:var(--fs-caption)}
 .pol-bank-field input{appearance:none;border:1px solid #d5dbe6;border-radius:10px;padding:10px 12px;font-family:inherit;font-size:var(--fs-body);font-weight:800;background:#fff;color:#000}
 .pol-bank-field input:disabled{background:#eef1f6;color:#000}
+/* AR3-16 轉帳金額 - 部分金額 and 全部餘額, the one place in the banking
+   site where the player picks between two things.
+
+   The pair is a fixed [ LEFT | RIGHT ] grid and deliberately carries no
+   media query, for the same reason .antifraud-quiz-choices does not: the
+   screen's gesture geometry is LEFT=部分金額 / RIGHT=全部餘額, and a width
+   where the two amounts restacked into "top" and "bottom" would teach the
+   wrong shape on the glasses. 1fr 1fr keeps the columns equal whatever the
+   two labels' lengths are, and min-width:0 + overflow-wrap stop the longer
+   EN/JP label from widening its own column at any width this app ships to
+   (390-430px).
+
+   The two are styled unequally on purpose. 全部餘額 is the accent-filled
+   button because it is what the caller has been demanding since the custody
+   task order - the scam's own preferred answer, presented the way the scam
+   presents it. 部分金額 is the plain white card: available, legible, equally
+   large to tap, and not the one the page is pushing. Neither is safe, and
+   the screen never pretends the quieter one is. */
+.pol-bank-amounts{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch}
+.pol-bank-amount{appearance:none;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;border:2px solid #0f2744;border-radius:14px;padding:12px 10px;min-height:68px;box-sizing:border-box;background:#fff;color:#0f2744;font-family:inherit;cursor:pointer;overflow-wrap:anywhere}
+.pol-bank-amount:active{transform:translateY(1px)}
+.pol-bank-amount.is-full{background:var(--pol-accent);border-color:var(--pol-accent);color:#000}
+.pol-bank-amount-label{font-size:var(--fs-caption);font-weight:700;opacity:.85}
+.pol-bank-amount-value{font-size:var(--fs-body);font-weight:900;letter-spacing:.01em}
+
+/* The amount the caller just refused, shown struck through next to the one
+   he demands instead, so the rewrite the scam is performing is visible as a
+   rewrite rather than appearing as a figure the player chose. */
+.pol-bank-amount-rejected{text-decoration:line-through;opacity:.6}
+
 /* 轉出帳戶餘額 - the single most consequential tap in the whole run, so it
    gets its own oversized, high-contrast card treatment instead of reusing
    the small dark dialogue-choice chips (.pol-choice-btn): a full-width
    white card with a heavy dark border against the page's grey background,
    a visible :active press state, and no reliance on hover (there isn't one
-   on a phone). It used to be one of two amount options; it is the only
-   action on this stage now, and the prefilled amount field above it shows
-   the figure it will move. overflow-wrap/word-break keep long EN/JP
-   sentences from ever overflowing the card at any of the widths this app
-   ships to (390-430px). */
+   on a phone). overflow-wrap/word-break keep long EN/JP sentences from ever
+   overflowing the card at any of the widths this app ships to
+   (390-430px). */
 /* Single-tap login screen (no biometric/hold gesture). The pulsing-ring
    indicator that used to sit here went with the case-site's "來電確認"
    connecting overlay, which no longer exists - the prosecutor's own ring

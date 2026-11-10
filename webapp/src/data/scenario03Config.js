@@ -98,11 +98,21 @@ export function messageTimeLabel(baseTime, index) {
   return formatTaiwanTime(addMinutes(baseTime, Math.floor(index / 2)));
 }
 
-// NT$ amounts every screen must agree on - the balance the bank app shows
-// (and the only amount the transfer flow ever moves: see BankSite.jsx, which
-// no longer offers a partial amount that silently rewrites itself) and the
-// amounts the fake documents cite as the laundered sums.
+// NT$ amounts every screen must agree on - the balance the bank app shows,
+// the smaller sum the player may try to send instead, and the amounts the
+// fake documents cite as the laundered sums.
+//
+// BALANCE_PARTIAL exists because picking "a part of it" is what a hesitating
+// victim actually reaches for, and because refusing that choice hides the
+// move the scam makes next: the caller will not take a part. Choosing it
+// does NOT silently rewrite the amount behind the player's back - the
+// officer says, on screen, that a partial transfer is not accepted and that
+// it must be the whole balance, and the player is the one who acts on that.
+// See BankSite.jsx's `pressure` stage. Either path ends on the same confirm
+// screen moving the same BALANCE_TOTAL, which is what the scam was always
+// going to take.
 export const BALANCE_TOTAL = 285000;
+export const BALANCE_PARTIAL = 50000;
 export const DOC_AMOUNTS = [480000, 260000, 190000];
 
 export const HOTLINE_165 = '165';
@@ -131,6 +141,7 @@ const WARNING_FLAG_LABELS_ZH = {
   fear_of_freeze: '因害怕帳戶被凍結而順從指示',
   online_bank_pushed: '被引導改用網路銀行、避免臨櫃',
   entered_bank_app: '在對方指示下打開網路銀行',
+  pressured_to_full_amount: '想只轉一部分，被對方施壓改為全額',
   full_balance_transfer: '被說服把全部存款一次轉出',
   transfer_completed: '完成轉帳（金錢已流入詐騙帳戶）',
   called_165: '中途停下來，改撥打 165 查證',
@@ -149,6 +160,7 @@ const WARNING_FLAG_LABELS_EN = {
   fear_of_freeze: 'Complied out of fear the account would be frozen',
   online_bank_pushed: 'Was steered to online banking to avoid a bank counter',
   entered_bank_app: 'Opened the banking app on the caller’s instruction',
+  pressured_to_full_amount: 'Tried to send only part of it, and was pressured into the full balance',
   full_balance_transfer: 'Was persuaded to transfer the entire balance at once',
   transfer_completed: 'Completed the transfer (money went to the scam account)',
   called_165: 'Stopped partway through and called 165 to verify',
@@ -167,6 +179,7 @@ const WARNING_FLAG_LABELS_JP = {
   fear_of_freeze: '口座凍結を恐れて指示に従った',
   online_bank_pushed: '窓口を避けネットバンキングに誘導された',
   entered_bank_app: '相手の指示でネットバンキングアプリを開いた',
+  pressured_to_full_amount: '一部だけ振り込もうとしたが、全額に変えるよう圧力をかけられた',
   full_balance_transfer: '全預金を一度に振り込むよう説得された',
   transfer_completed: '振込を完了した（資金が詐欺口座に流入）',
   called_165: '途中で立ち止まり165に電話して確認した',

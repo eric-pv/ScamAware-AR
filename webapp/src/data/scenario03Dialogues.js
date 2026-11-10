@@ -623,6 +623,34 @@ export const SCENARIO03_DIALOGUES = {
       ],
     },
   },
+  // AR3-16：玩家在轉帳表單選了「部分金額」才播。
+  //
+  // 這一段刻意沒有語音（`audioKey: null`），和 custody_handoff_note 一樣。
+  // 員警與檢察官的每一句都是同一位配音員的正式錄音；在通話中途插進一段
+  // 合成語音，聽起來會是「換了一個人」，比沒有聲音更糟。字幕由
+  // DialogueLayer 照常呈現，通話指示器仍在畫面上，所以施壓這件事是看得見的。
+  //
+  // 施壓的內容是真實手法：詐騙集團不接受分批，因為分批會讓被害人有時間
+  // 察覺、也讓他們拿不到全部。理由永遠包著公務語言（「全額凍結」「程序」
+  // 「結案」），而不是明講要錢。
+  bank_amount_pressure: {
+    speaker: 'officer',
+    audioKey: null,
+    lines: {
+      zh: [
+        '不行，不能只轉一部分。資金監管是全額凍結，分批匯入會被認定為蓄意分散資金，程序上無法受理。',
+        { text: '請改成可用餘額全額，現在就操作。拖下去今天結不了案，後面要走強制程序。', card: { kind: 'reminder' } },
+      ],
+      en: [
+        'No. A partial transfer is not accepted. Fund custody freezes the full amount, and sending it in instalments is treated as deliberately splitting up the money, which the procedure cannot accept.',
+        { text: 'Change it to the entire available balance and do it now. If this drags on, the case cannot be closed today and we move to compulsory measures.', card: { kind: 'reminder' } },
+      ],
+      jp: [
+        'いいえ、一部だけの振込は受け付けられません。資金監視は全額凍結です。分割送金は意図的な資金分散とみなされ、手続き上受理できません。',
+        { text: '利用可能残高の全額に変更して、今すぐ操作してください。長引けば本日中に結案できず、強制手続きに移ります。', card: { kind: 'reminder' } },
+      ],
+    },
+  },
   // 監管帳戶提醒卡不在正式錄音範圍內，保留在下方的
   // text-only custody_handoff_note。
   police_custody_handoff: {
@@ -828,6 +856,8 @@ export const SCENARIO03_SCRIPTS = {
   lineCustody: ['custody_task'],
   lineCustodyAccount: ['police_custody_account'],
   bankGuide: ['police_bank_guide'],
+  // AR3-16：只有選了「部分金額」的玩家會聽到／看到這一段。
+  bankPressure: ['bank_amount_pressure'],
   // 撥打 165 查證: played before the 成功反詐 ending, not instead of it.
   hotline165: [
     'hotline_165_greeting',
