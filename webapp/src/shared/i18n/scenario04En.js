@@ -754,6 +754,20 @@ export const EN = {
   // live here rather than in a shared dictionary.
   '是': 'True',
   '否': 'False',
+  '選項 {n}':
+    'Option {n}',
+  '選項 {n}，共 {total} 個':
+    'Option {n} of {total}',
+  '答對 {n} / {total} 個選項':
+    '{n} of {total} options correct',
+  '收到的商品與商品頁宣稱明顯不符。下列每一個做法，正確嗎？':
+    'The item you received clearly does not match what the listing claimed. Is each of the following the right thing to do?',
+  '先保存商品頁截圖、開箱照片與對話紀錄，再透過平台申請退貨退款。':
+    'Save screenshots of the listing, unboxing photos and the chat log first, then file a return and refund through the platform.',
+  '賣家已經同意退貨，就可以放心等退款自動完成。':
+    'Once the seller has agreed to the return, you can safely wait for the refund to complete on its own.',
+  '依賣家指示離開平台、用私下管道退款，這樣比較快。':
+    'Follow the seller\'s instructions to leave the platform and settle the refund privately, because it is faster.',
   '第 {n} 題，共 {total} 題': 'Statement {n} of {total}',
   '答對 {n} / {total} 題': '{n} of {total} correct',
   '你的答案：{said}　正解：{answer}': 'You answered {said}　Correct answer: {answer}',
