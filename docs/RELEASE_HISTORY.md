@@ -43,6 +43,7 @@
 | Release | Shell | Web Bundle | Date | PR | Commit | Type | Notes |
 | ------- | ----- | ---------- | ---- | -- | ------ | ---- | ----- |
 <!-- ota-release-rows -->
+| `1.11.1-20261110.003` | 1.2.11 | 1.11.1 | 2026-11-10 | #45 | `f72dbdb` | PATCH | Merge pull request #45 from eric-pv/claude/intelligent-franklin-sou8qm |
 | `1.11.0-20261110.002` | 1.2.11 | 1.11.0 | 2026-11-10 | #44 | `e1ac3aa` | MINOR | Merge pull request #44 from claude/intelligent-franklin-sou8qm |
 | `1.10.0-20261110.001` | 1.2.11 | 1.10.0 | 2026-11-10 | #43 | `76931d9` | MINOR | Merge pull request #43 from eric-pv/claude/intelligent-franklin-sou8qm |
 | `1.9.14-20261029.003` | 1.2.11 | 1.9.14 | 2026-10-29 | #42 | `dbf3981` | PATCH | Merge pull request #42 from magician-eric/fix/scenario03-case-task-grid |

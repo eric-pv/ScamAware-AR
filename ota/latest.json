@@ -1,12 +1,12 @@
 {
-  "releaseId": "1.11.0-20261110.002",
-  "version": "1.11.0",
+  "releaseId": "1.11.1-20261110.003",
+  "version": "1.11.1",
   "releaseDate": "2026-11-10",
-  "sequence": 2,
-  "gitCommit": "e1ac3aa0e54976013c666878921f36d351b4aba7",
-  "sourcePR": 44,
-  "sha256": "8b37ad0356ca4ec2647a95906f6ac37dcb64e4971cc0668ba6de48f5e61e24eb",
-  "sizeBytes": 120448344,
+  "sequence": 3,
+  "gitCommit": "f72dbdbc7ce8eed985315fa7243956a7175017a3",
+  "sourcePR": 45,
+  "sha256": "45e262bb6098243579b0bcb786f6918469c69e0bda450a5e716e325f8ab1ce64",
+  "sizeBytes": 120448360,
   "minShellVersion": "1.2.0",
-  "url": "https://github.com/eric-pv/ScamAware-AR/releases/download/web-1.11.0-20261110.002/cibar-web-1.11.0-20261110.002.zip"
+  "url": "https://github.com/eric-pv/ScamAware-AR/releases/download/web-1.11.1-20261110.003/cibar-web-1.11.1-20261110.003.zip"
 }
