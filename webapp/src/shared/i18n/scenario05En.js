@@ -93,8 +93,6 @@ export const EN = {
     "That's because we're not paying through MyDonDon this time, so of course the order won't appear there.",
   '我這邊都已經照流程付款了，你現在才說找不到訂單，我也很困擾耶。':
     "I've already followed the process and paid. It's frustrating for me too that you're only now saying you can't find the order.",
-  '你先回 SafeDeal 看一下好不好？不要還沒確認，就覺得是我沒有付款。':
-    "Could you check SafeDeal first? Please don't assume I haven't paid before you've even checked.",
   '沒有官方訂單，也沒有入帳，我先停止交易。':
     "There's no order on the original platform and no payment in my account. I'll stop this transaction.",
   '客服那邊應該都跟你說明了吧？我這邊付款早就完成了，現在就等你寄出了。':
@@ -205,6 +203,8 @@ export const EN = {
     'I haven\'t confirmed that the money is actually in my account. I won\'t ship it yet.',
   '我相信對方，使用黑皮通寄件。':
     'I\'ll trust them and ship the item through HPE.',
+  '款項就在 SafeDeal 那邊，你登入就看得到。確認一下，今天還來得及寄出。':
+    "The money is sitting in SafeDeal — just log in and you'll see it. Check it, and there's still time to ship today.",
   '查無資料':
     'No record found',
   '交易編號':
