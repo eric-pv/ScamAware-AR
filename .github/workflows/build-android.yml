@@ -472,7 +472,7 @@ jobs:
             printf '### 網頁內容從哪裡來\n\n'
             printf -- '- **APK 內建一份完整的 CIBAR**，由本機 `https://appassets.androidplatform.net/ScamAware-AR/` 提供。'
             printf '第一次安裝後即使完全沒有網路，五個情境、影片、音效、圖片、圖像辨識都能完整跑完。\n'
-            printf -- '- **有網路時**會在背景檢查 <https://magician-eric.github.io/ScamAware-AR/ota/latest.json>，'
+            printf -- '- **有網路時**會在背景檢查 <https://eric-pv.github.io/ScamAware-AR/ota/latest.json>，'
             printf '有新版就在背景下載、驗證 SHA-256、解壓縮並完整檢查。\n'
             printf -- '- **不會在體驗途中換版**：驗證通過的新版會等到**下一次啟動** App 才生效。\n'
             printf -- '- 下載失敗、中斷或檔案損毀都不影響目前這一份，App 照常使用。\n'

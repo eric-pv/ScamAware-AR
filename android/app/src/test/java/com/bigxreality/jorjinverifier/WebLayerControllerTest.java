@@ -38,7 +38,7 @@ public class WebLayerControllerTest {
         assertNull(WebLayerController.pageOf("about:blank"));
         assertNull(WebLayerController.pageOf("https://example.com/"));
         // A look-alike host must not pass for CIBAR.
-        assertNull(WebLayerController.pageOf("https://magician-eric.github.io/ScamAware-AR-evil/"));
+        assertNull(WebLayerController.pageOf("https://eric-pv.github.io/ScamAware-AR-evil/"));
         // The engineering pages are gone, and their addresses must not resolve to CIBAR either.
         assertNull(WebLayerController.pageOf("file:///android_asset/gesture-test/index.html"));
     }
@@ -73,7 +73,7 @@ public class WebLayerControllerTest {
         assertFalse(WebLayerController.isGlassesCameraRequest(
                 WebLayerController.GLASSES_CAMERA_URL + "2"));
         assertFalse(WebLayerController.isGlassesCameraRequest(
-                "https://magician-eric.github.io/ScamAware-AR-evil/__jorjin-camera.mjpeg"));
+                "https://eric-pv.github.io/ScamAware-AR-evil/__jorjin-camera.mjpeg"));
     }
 
     /**
