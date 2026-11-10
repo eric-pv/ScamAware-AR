@@ -43,6 +43,7 @@
 | Release | Shell | Web Bundle | Date | PR | Commit | Type | Notes |
 | ------- | ----- | ---------- | ---- | -- | ------ | ---- | ----- |
 <!-- ota-release-rows -->
+| `1.13.3-20261110.010` | 1.2.12 | 1.13.3 | 2026-11-10 | #52 | `66ff542` | PATCH | Merge pull request #52: AR4-19 純階層、AR5-12 查無此筆訂單 |
 | `1.13.2-20261110.009` | 1.2.12 | 1.13.2 | 2026-11-10 | #51 | `286b188` | PATCH | Merge pull request #51: AR5-A04 受騙結局改為查無此筆款項 |
 | `1.13.1-20261110.008` | 1.2.12 | 1.13.1 | 2026-11-10 | #50 | `d47421b` | PATCH | Merge pull request #50: AR4-19 三段式解析、AR4-20 複選題、AR5-A03 查無資料 |
 | `1.13.0-20261110.007` | 1.2.12 | 1.13.0 | 2026-11-10 | #49 | `05677f0` | MINOR | Merge pull request #49 from eric-pv/claude/intelligent-franklin-sou8qm |
