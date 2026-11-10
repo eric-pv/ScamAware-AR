@@ -33,11 +33,37 @@ function warnMissing(src, reason) {
   console.warn(`[scenario03] 找不到或無法播放語音檔：${src}（${reason}）→ 改用字幕計時播放`);
 }
 
-export function useScenarioAudio() {
+// `rate` is how fast the recording plays: 1 is the voice as recorded, 1.82 is
+// 快速節奏. It is applied to the element, NOT simulated by shortening the
+// subtitle timer - that distinction is the whole point. useScriptPlayer ends a
+// recorded beat on `audio.progress` (currentTime / duration), and raising the
+// playback rate makes that fraction climb proportionally faster in real time,
+// so the voice and its subtitle stay locked together at any rate and no line
+// is cut short. Pitch is preserved, so a faster officer still sounds human.
+export function useScenarioAudio(rate = 1) {
   const elRef = useRef(null);
   const srcRef = useRef(null);
   const handlersRef = useRef({});
+  const rateRef = useRef(rate);
   const [state, setState] = useState({ src: null, progress: null, playing: false });
+
+  const applyRate = useCallback((el) => {
+    if (!el) return;
+    try {
+      // Safari spells it with a prefix; setting both is harmless elsewhere.
+      el.preservesPitch = true;
+      el.webkitPreservesPitch = true;
+      el.playbackRate = rateRef.current;
+    } catch {
+      // A WebView that refuses the rate just plays at 1x - the subtitle still
+      // follows the audio, so the scene stays correct, only not faster.
+    }
+  }, []);
+
+  useEffect(() => {
+    rateRef.current = rate > 0 ? rate : 1;
+    applyRate(elRef.current);
+  }, [rate, applyRate]);
 
   // Lazily creates the ONE Audio element this hook will ever use, wiring up
   // its listeners once. Every listener reads srcRef.current at fire time
@@ -66,8 +92,9 @@ export function useScenarioAudio() {
       handlersRef.current.onUnavailable?.();
     });
     elRef.current = el;
+    applyRate(el);
     return el;
-  }, []);
+  }, [applyRate]);
 
   const stop = useCallback(() => {
     const el = elRef.current;
@@ -112,6 +139,8 @@ export function useScenarioAudio() {
     }
     el.src = src;
     el.load();
+    // After load(), not before: some WebViews reset the rate with the media.
+    applyRate(el);
 
     const started = el.play();
     if (started && typeof started.catch === 'function') {
@@ -124,7 +153,7 @@ export function useScenarioAudio() {
         handlersRef.current.onUnavailable?.();
       });
     }
-  }, [stop, ensureElement]);
+  }, [stop, ensureElement, applyRate]);
 
   const pause = useCallback(() => {
     elRef.current?.pause();

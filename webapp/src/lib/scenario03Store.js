@@ -11,12 +11,19 @@ const STATE_KEY = 'cibar-scenario03-state';
 // duration so staff can demo the whole flow quickly without cutting content.
 export const FAST_PACE_MULTIPLIER = 0.55;
 
+// The pace deliberately does NOT live in the run state below. That state is
+// sessionStorage and `resetScenario03()` wipes it back to DEFAULT_STATE on
+// every scenario entry (lib/enterScenario.js) - a pace chosen in staff mode
+// would be gone the moment the visitor started the run. It belongs to the
+// venue, not to the run, so it is staff-owned and persists like the location
+// profile: set once in 工作人員管理模式, kept across runs and restarts.
+const PACE_KEY = 'cibar-scenario03-pace';
+
 export const DEFAULT_STATE = {
   stepIndex: 0,
   reachedSteps: ['phone-home'],
   choices: {},
   warningFlags: [],
-  pace: 'normal', // 'normal' | 'fast'
   documentsRead: [],
   consentSigned: false,
   prosecutorCallCompleted: false,
@@ -139,8 +146,43 @@ export function markStepReached(stepKey, stepIndex) {
   write({ ...current, reachedSteps, stepIndex: Math.max(current.stepIndex, stepIndex) });
 }
 
+// --- 體驗節奏 (staff-owned, outside the run state) -------------------------
+
+const paceListeners = new Set();
+let cachedPace = null;
+
+export function getPace() {
+  if (cachedPace) return cachedPace;
+  try {
+    cachedPace = localStorage.getItem(PACE_KEY) === 'fast' ? 'fast' : 'normal';
+  } catch {
+    // storage unavailable (private mode, WebView with storage off): the
+    // venue's choice cannot be remembered, so fall back to the safe default.
+    cachedPace = 'normal';
+  }
+  return cachedPace;
+}
+
 export function setPace(pace) {
-  updateScenario03State({ pace });
+  const next = pace === 'fast' ? 'fast' : 'normal';
+  cachedPace = next;
+  try {
+    localStorage.setItem(PACE_KEY, next);
+  } catch {
+    // Still applied for this session through `cachedPace`.
+  }
+  paceListeners.forEach((fn) => fn(next));
+}
+
+export function usePace() {
+  const [pace, setLocal] = useState(getPace);
+  useEffect(() => {
+    const fn = (next) => setLocal(next);
+    paceListeners.add(fn);
+    setLocal(getPace());
+    return () => paceListeners.delete(fn);
+  }, []);
+  return pace;
 }
 
 export function useScenario03State() {
@@ -155,6 +197,5 @@ export function useScenario03State() {
 }
 
 export function usePaceMultiplier() {
-  const state = useScenario03State();
-  return state.pace === 'fast' ? FAST_PACE_MULTIPLIER : 1;
+  return usePace() === 'fast' ? FAST_PACE_MULTIPLIER : 1;
 }

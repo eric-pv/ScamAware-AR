@@ -135,3 +135,9 @@
 .staff-gesture-cell.is-too-near{background:#4b2a6b;color:rgba(255,255,255,.7)}
 .staff-gesture-cell.is-masked{background:repeating-linear-gradient(45deg,#2a2f3a 0 3px,#11151d 3px 6px);color:rgba(255,255,255,.45)}
 .staff-gesture-cell.is-hand{background:#ffd23f;color:#111;font-weight:800}
+
+/* 體驗節奏 (StaffPacePanel). The two choices read as one control, so the row
+   keeps the equal-width buttons `.staff-btn-row` already gives and only adds
+   the breathing room between the control and the sentence explaining it. */
+.staff-pace-row{margin-top:10px}
+.staff-pace-hint{margin-top:10px}

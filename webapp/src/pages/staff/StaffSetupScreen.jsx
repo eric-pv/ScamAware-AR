@@ -18,6 +18,7 @@ import { requestCurrentPosition, isOnline } from '../../lib/location/LocationMan
 import { isDeviceClockSuspicious, DEVICE_CLOCK_WARNING, generateSessionTimestamp } from '../../lib/dateTimeService';
 import { StaffLocationSummary } from './StaffLocationSummary';
 import { StaffHandoffConfirm } from './StaffHandoffConfirm';
+import { StaffPacePanel } from './StaffPacePanel';
 import { StaffVersionPanel } from './StaffVersionPanel';
 import { StaffEnvironmentPanel } from './StaffEnvironmentPanel';
 import { StaffGesturePanel } from './StaffGesturePanel';
@@ -270,6 +271,11 @@ export function StaffSetupScreen() {
           gesture range, the signal filter - with the sensor's live view and the frame log
           export beside them. */}
       <StaffGesturePanel />
+
+      {/* 體驗節奏: the one setting here that changes what a visitor experiences
+          rather than how the device reads them, so it sits after the two setup
+          panels and before the version panel. */}
+      <StaffPacePanel />
 
       <StaffVersionPanel />
 
