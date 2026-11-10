@@ -8,6 +8,20 @@ on:
     # Android-only push has no reason to rebuild and republish the webapp.
     paths-ignore:
       - "android/**"
+  # 正式 OTA release 發佈後再部署一次。
+  #
+  # ota-release.yml 寫好 release/ota/latest.json 與 ota/latest.json 之後，會用
+  # 帶 [skip ci] 的 commit 推回 main —— 那個標記正是為了避免無窮迴圈，但副作用
+  # 是這個 workflow 不會因此重跑，於是 Pages 繼續提供上一次部署時的 manifest。
+  # 結果是線上的 ota/latest.json 永遠落後一個版本：眼鏡查到的是上一版，裝置
+  # 更新後看到的也是上一版，而 repo 裡明明已經是新的。2026-11-10 的驗收現場就
+  # 因為這個問題反覆出現「機器上還是舊的」。
+  #
+  # workflow_run 不受 [skip ci] 影響，所以這裡補上一次部署。下面的 job 會先確認
+  # 那次 release 真的成功才繼續，失敗的 release 不應該把站上的 manifest 換掉。
+  workflow_run:
+    workflows: ["OTA Web Bundle Release"]
+    types: [completed]
   workflow_dispatch:
 
 permissions:
@@ -21,6 +35,10 @@ concurrency:
 
 jobs:
   build:
+    # 由 OTA release 觸發時，只有那次 release 成功才部署；其他觸發方式照舊。
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
