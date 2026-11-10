@@ -152,10 +152,19 @@ export function buildBuyerTree(product, lang) {
     // caution into an accusation they now have to disprove. Emotional
     // pressure and blame-shifting, not a demand, and it aims the player back
     // at the site the scammer controls.
+    //
+    // His last line names SHIPPING as the goal and SafeDeal as the step on
+    // the way to it ("確認一下，今天還來得及寄出"), rather than asking the
+    // player to go and look at SafeDeal instead. That is what makes both
+    // answers below answer the same question: 停止交易 refuses the whole
+    // package, 去寄件 accepts it - and accepting it lands on SafeDeal, which
+    // is exactly where he just said to look. An earlier version asked only
+    // "你先回 SafeDeal 看一下好不好？", which left the player replying
+    // "I'll go ship it" to a question about checking a page.
     { id: 'buyer.s07.explain', messages: [
       buyer(tt('因為我們這次不是走買東東付款，所以買東東本來就不會有這筆訂單啊。')),
       buyer(tt('我這邊都已經照流程付款了，你現在才說找不到訂單，我也很困擾耶。')),
-      buyer(tt('你先回 SafeDeal 看一下好不好？不要還沒確認，就覺得是我沒有付款。')),
+      buyer(tt('款項就在 SafeDeal 那邊，你登入就看得到。確認一下，今天還來得及寄出。')),
     ], choices: [
       { id: 'a', label: tt('沒有官方訂單，也沒有入帳，我先停止交易。'), nextNodeId: 'buyer.exit.endingCaught', awareness: 'noOrderNoPayment' },
       { id: 'b', label: tt('相信對方，去寄件。'), nextNodeId: 'buyer.s07.toPaymentStatus' },
