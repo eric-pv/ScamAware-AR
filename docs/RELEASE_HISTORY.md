@@ -43,6 +43,7 @@
 | Release | Shell | Web Bundle | Date | PR | Commit | Type | Notes |
 | ------- | ----- | ---------- | ---- | -- | ------ | ---- | ----- |
 <!-- ota-release-rows -->
+| `1.13.1-20261110.008` | 1.2.12 | 1.13.1 | 2026-11-10 | #50 | `d47421b` | PATCH | Merge pull request #50: AR4-19 三段式解析、AR4-20 複選題、AR5-A03 查無資料 |
 | `1.13.0-20261110.007` | 1.2.12 | 1.13.0 | 2026-11-10 | #49 | `05677f0` | MINOR | Merge pull request #49 from eric-pv/claude/intelligent-franklin-sou8qm |
 | `1.12.0-20261110.006` | 1.2.12 | 1.12.0 | 2026-11-10 | #48 | `1be6ff8` | MINOR | Merge pull request #48 from eric-pv/claude/intelligent-franklin-sou8qm |
 | `1.11.3-20261110.005` | 1.2.12 | 1.11.3 | 2026-11-10 | #47 | `8e9d74f` | PATCH | Merge pull request #47 from claude/intelligent-franklin-sou8qm |
