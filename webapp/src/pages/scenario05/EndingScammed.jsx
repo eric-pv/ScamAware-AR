@@ -40,10 +40,10 @@ export function EndingScammed() {
         { label: t('總損失'), value: formatNtAmount(depositLost + itemLost), emphasis: true },
         { label: t('實際入帳'), value: formatNtAmount(0) },
         { label: t('黑皮通'), value: t('已送達') },
-        { label: t('外部交易網站'), value: t('網站無法連線') },
+        { label: t('外部交易網站'), value: t('查無此筆款項') },
         { label: buyer.name, value: t('帳號不存在') },
       ]}
-      explanation={t('你相信假客服，支付了所謂可退還的驗證金，也在尚未確認入帳時寄出商品。商品已送達，但買家帳號消失，SafeDeal 也無法連線。驗證金沒有退回，貨款也沒有入帳。')}
+      explanation={t('你相信假客服，支付了所謂可退還的驗證金，也在尚未確認入帳時寄出商品。商品已送達，但買家帳號消失，SafeDeal 的收款頁查無這筆款項的任何紀錄。驗證金沒有退回，貨款也沒有入帳。')}
       takeaway={t('你看到的是假的付款成功頁面，真正的官方平台從未產生訂單。')}
       analysisTo="/scenario05-atm/reveal"
     />

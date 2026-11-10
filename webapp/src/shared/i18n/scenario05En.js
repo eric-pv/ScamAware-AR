@@ -196,6 +196,10 @@ export const EN = {
   // pages/scenario05/SafeDealPaymentStatus.jsx - the fake site’s own
   // "payment receipt status", which is a claim, never a verified fact
   // -----------------------------------------------------------------------
+  '查無此筆款項':
+    'No record of this payment',
+  '你相信假客服，支付了所謂可退還的驗證金，也在尚未確認入帳時寄出商品。商品已送達，但買家帳號消失，SafeDeal 的收款頁查無這筆款項的任何紀錄。驗證金沒有退回，貨款也沒有入帳。':
+    'You believed the fake support agent, paid a so-called refundable verification deposit, and shipped the item before confirming any money had arrived. The item was delivered, but the buyer\'s account is gone and SafeDeal\'s payment page has no record of this payment at all. The deposit was never returned, and the sale was never paid.',
   '查無資料':
     'No record found',
   '交易編號':
