@@ -13,7 +13,16 @@
 .tfq-card h2{color:#fff;margin:0 0 10px}
 .tfq-back{flex:none;width:calc(100% - 32px);margin:0 16px calc(12px + env(safe-area-inset-bottom));box-sizing:border-box}
 
+/* The one question. It stays on screen under the title for the whole
+   screen - while each option is being judged and again over the review -
+   because every option is an answer to it and none of them reads correctly
+   on its own. Given its own weight (a left rule and the body size) so it is
+   never mistaken for one of the options below it. */
+.tfq-question{font-size:var(--fs-body);line-height:1.6;color:#f4f8ff;font-weight:700;margin:0 0 12px;padding-left:10px;border-left:3px solid rgba(255,255,255,.35)}
 .tfq-progress{font-size:var(--fs-caption);color:#c3cfe0;margin:0 0 6px}
+/* 選項 1/2/3 in the review list, so each verdict says which option it is
+   judging rather than leaving the reader to count down the list. */
+.tfq-review-label{font-size:var(--fs-caption);font-weight:800;letter-spacing:.04em;color:#c3cfe0;margin:0 0 3px}
 
 /* The statement IS the question, so it carries the weight the two-option
    quiz gives its question line: the player answers this sentence rather

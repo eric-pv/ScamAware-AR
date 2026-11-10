@@ -196,6 +196,14 @@ export const EN = {
   // pages/scenario05/SafeDealPaymentStatus.jsx - the fake site’s own
   // "payment receipt status", which is a claim, never a verified fact
   // -----------------------------------------------------------------------
+  '查無資料':
+    'No record found',
+  '交易編號':
+    'Transaction ID',
+  '繼續':
+    'Continue',
+  '查無此筆款項資料。系統中沒有這筆交易的任何付款或收款紀錄。':
+    'No record of this payment. The system holds no incoming or outgoing payment record for this transaction.',
   '收款狀態': 'Payment Receipt Status',
   '買方付款狀態': "Buyer's Payment Status",
   '買方聲稱已付款': 'Buyer claims payment is complete',
