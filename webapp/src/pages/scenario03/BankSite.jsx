@@ -9,7 +9,7 @@ import { getOrCreateScenarioSession } from '../../lib/session/ScenarioSessionFac
 import { buildScenario03Script } from '../../data/scenario03Dialogues';
 import { addWarningFlags, getScenario03State, updateScenario03State, usePaceMultiplier } from '../../lib/scenario03Store';
 import { playSound } from '../../lib/scenario03Feedback';
-import { BALANCE_TOTAL, formatNT } from '../../data/scenario03Config';
+import { BALANCE_PARTIAL, BALANCE_TOTAL, formatNT } from '../../data/scenario03Config';
 import { getScenario03Strings } from './i18n';
 import { FraudWarningBanner } from '../../components/warnings/FraudWarningBanner';
 import { useARInteraction } from '../../lib/arInteraction';
@@ -31,10 +31,19 @@ import { useARInteraction } from '../../lib/arInteraction';
 // to the officer in LINE and on the call, and the page carries only what an
 // online bank carries: sign in, balance, transfer, confirm.
 //
-// One transfer, one amount: the whole balance, which is what the caller has
-// been demanding since the custody task order. There is no 先轉一部分 option
-// that silently rewrites itself into the full amount a moment later.
-const STAGES = ['login', 'overview', 'transfer', 'confirm'];
+// The transfer form offers both amounts the player might reach for - 部分金額
+// and 全部餘額 - because "can I just send some of it?" is the thing a
+// hesitating victim actually tries, and because the scam's answer to it is
+// the lesson. The caller does not take a part: he refuses it on the spot,
+// in procedural language, and demands the whole balance.
+//
+// What this must NOT be, and an earlier build was: an amount that silently
+// rewrites itself into the full balance a moment after the player picks the
+// smaller one. The rewrite is the scam's move, so the scam makes it out
+// loud, on its own screen (`pressure`), and the player is the one who acts
+// on it. Both paths then meet on the same confirm screen moving the same
+// BALANCE_TOTAL - which is what the caller was always going to take.
+const STAGES = ['login', 'overview', 'transfer', 'pressure', 'confirm'];
 
 export function BankSite() {
   const navigate = useNavigate();
@@ -61,6 +70,13 @@ export function BankSite() {
   const guideScript = useMemo(() => buildScenario03Script('bankGuide', session), [session]);
   const guidePlayer = useScriptPlayer(guideScript, pace, stage === 'transfer');
 
+  // The refusal of 部分金額. Text-only (see bank_amount_pressure in
+  // data/scenario03Dialogues.js for why it carries no recording), gated on
+  // the pressure stage so it starts when the player picks the smaller
+  // amount and not before.
+  const pressureScript = useMemo(() => buildScenario03Script('bankPressure', session), [session]);
+  const pressurePlayer = useScriptPlayer(pressureScript, pace, stage === 'pressure');
+
   const t = getScenario03Strings();
 
   function persistBankProgress(patch) {
@@ -79,9 +95,23 @@ export function BankSite() {
     persistBankProgress({ bankStage: 'transfer' });
   }
 
-  // One action, one amount: the whole balance. The confirm page, the ending's
-  // 轉入所謂「監管帳戶」金額 and transferAmount all read the same
-  // BALANCE_TOTAL, so no screen can quote a figure the player never chose.
+  // 部分金額: the player's own choice, kept exactly as chosen and shown back
+  // to them on the next screen next to what the caller demands instead. The
+  // run is NOT yet flagged full_balance_transfer here - at this point the
+  // player has not agreed to send everything.
+  function choosePartial() {
+    playSound('click');
+    addWarningFlags('pressured_to_full_amount');
+    setAmount(BALANCE_PARTIAL);
+    setStage('pressure');
+    persistBankProgress({ bankStage: 'pressure', bankAmount: BALANCE_PARTIAL });
+  }
+
+  // The one amount this transfer ever actually moves. Reached either
+  // straight from the form (全部餘額) or from the pressure screen, and
+  // identical both ways: the confirm page, the ending's 轉入所謂「監管帳戶」
+  // 金額 and transferAmount all read the same BALANCE_TOTAL, so no screen
+  // can quote a figure the player never chose.
   function toConfirm() {
     playSound('click');
     addWarningFlags('full_balance_transfer');
@@ -96,21 +126,33 @@ export function BankSite() {
     navigate('/scenario03-police/final');
   }
 
-  // AR Interaction Contract: the site is a straight line of one-action pages -
-  // 登入, 轉帳, 下一步, 確認交易 - so every stage is `single`. The officer's
-  // guide recording plays over the transfer form on its own and never asks
-  // the player anything, so it never changes the geometry.
-  useARInteraction({
-    mode: 'single',
-    surfaceId: `scenario03/bank/${stage}`,
-    action: stage === 'login'
-      ? signIn
-      : stage === 'overview'
-        ? goTransfer
-        : stage === 'transfer'
-          ? toConfirm
-          : toFinal,
-  });
+  // AR Interaction Contract: every stage is one action - 登入, 轉帳,
+  // 改為全部餘額並繼續, 確認交易 - except the transfer form, which is the
+  // one place the player picks between two amounts and is therefore `dual`.
+  // LEFT is 部分金額 and RIGHT is 全部餘額, in the order the two buttons are
+  // drawn, and matching the rest of the app's left-is-the-safer-answer
+  // geometry: neither amount escapes the scam, but only one of them hands
+  // over everything on the first move. The officer's guide recording plays
+  // over the form on its own and never asks the player anything, so it does
+  // not change the geometry.
+  useARInteraction(stage === 'transfer'
+    ? {
+      mode: 'dual',
+      surfaceId: 'scenario03/bank/transfer',
+      left: choosePartial,
+      right: toConfirm,
+    }
+    : {
+      mode: 'single',
+      surfaceId: `scenario03/bank/${stage}`,
+      action: stage === 'login'
+        ? signIn
+        : stage === 'overview'
+          ? goTransfer
+          : stage === 'pressure'
+            ? toConfirm
+            : toFinal,
+    });
 
   // The browser the page is being viewed in. Display-only on purpose: the
   // back arrow and the menu are chrome the player recognises, not controls
@@ -157,6 +199,7 @@ export function BankSite() {
     <PoliceFrame stepKey="bank" statusTitle={t.bank.statusTitleApp}>
       <FraudWarningBanner active={stage === 'confirm'} theme="phone" severity="block" title={t.bank.warningTitle} body={t.bank.warnBox} duration={7000} placement="above-footer" />
       {stage === 'transfer' && <DialogueLayer player={guidePlayer} />}
+      {stage === 'pressure' && <DialogueLayer player={pressurePlayer} />}
       <div className="pol-web">
         {browserChrome}
         <div className="pol-bank">
@@ -198,11 +241,40 @@ export function BankSite() {
                   </dl>
                 </section>
 
+                {/* AR3-16. Two amounts, drawn LEFT then RIGHT to match the
+                    dual gesture declared above. The smaller one is a real
+                    choice with a real consequence - it is refused on the
+                    next screen - not a decoy that rewrites itself. */}
                 <div className="pol-bank-field">
-                  <span>{t.bank.transferAmountLabel}</span>
-                  <input value={formatNT(BALANCE_TOTAL)} disabled readOnly />
+                  <span>{t.bank.amountSectionLabel}</span>
                 </div>
-                <button type="button" className="pol-cta" onClick={toConfirm}>{t.bank.nextStep}</button>
+                <div className="pol-bank-amounts">
+                  <button type="button" className="pol-bank-amount" onClick={choosePartial}>
+                    <span className="pol-bank-amount-label">{t.bank.amountPartial}</span>
+                    <span className="pol-bank-amount-value">{formatNT(BALANCE_PARTIAL)}</span>
+                  </button>
+                  <button type="button" className="pol-bank-amount is-full" onClick={toConfirm}>
+                    <span className="pol-bank-amount-label">{t.bank.amountFull}</span>
+                    <span className="pol-bank-amount-value">{formatNT(BALANCE_TOTAL)}</span>
+                  </button>
+                </div>
+              </>
+            )}
+
+            {stage === 'pressure' && (
+              <>
+                <section className="pol-card">
+                  <h3>{t.bank.pressureHeader}</h3>
+                  <dl className="pol-kv">
+                    <dt>{t.bank.pressureFromLabel}</dt>
+                    <dd className="pol-bank-amount-rejected">{formatNT(amount ?? BALANCE_PARTIAL)}</dd>
+                    <dt>{t.bank.pressureToLabel}</dt>
+                    <dd style={{ fontSize: 'var(--fs-title-sm)' }}>{formatNT(BALANCE_TOTAL)}</dd>
+                    <dt>{t.bank.toAccountLabel}</dt><dd>{session.fakeBankAccount}</dd>
+                    <dt>{t.bank.accountNameLabel}</dt><dd>{t.bank.accountNameValue}</dd>
+                  </dl>
+                </section>
+                <button type="button" className="pol-cta" onClick={toConfirm}>{t.bank.pressureCta}</button>
               </>
             )}
 
