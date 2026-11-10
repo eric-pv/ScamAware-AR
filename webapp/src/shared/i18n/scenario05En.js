@@ -97,7 +97,6 @@ export const EN = {
     "Could you check SafeDeal first? Please don't assume I haven't paid before you've even checked.",
   '沒有官方訂單，也沒有入帳，我先停止交易。':
     "There's no order on the original platform and no payment in my account. I'll stop this transaction.",
-  '我再去 SafeDeal 確認一下。': "I'll check SafeDeal again.",
   '客服那邊應該都跟你說明了吧？我這邊付款早就完成了，現在就等你寄出了。':
     "Support should have explained everything to you by now, right? I finished paying ages ago. I'm just waiting for you to ship it.",
   '我是真的有需要才跟你買的，也一直很有耐心在等。你現在又說要等入帳，我真的不知道還要等多久……':
@@ -198,12 +197,14 @@ export const EN = {
     'No record of this payment',
   '你相信假客服，支付了所謂可退還的驗證金，也在尚未確認入帳時寄出商品。商品已送達，但買家帳號消失，SafeDeal 的收款頁查無這筆款項的任何紀錄。驗證金沒有退回，貨款也沒有入帳。':
     'You believed the fake support agent, paid a so-called refundable verification deposit, and shipped the item before confirming any money had arrived. The item was delivered, but the buyer\'s account is gone and SafeDeal\'s payment page has no record of this payment at all. The deposit was never returned, and the sale was never paid.',
-  '沒有官方訂單也沒有入帳，先停止交易。':
-    'There is no official order and no money has arrived. I am stopping this transaction.',
   '相信對方，去寄件。':
     'I\'ll trust them and ship it.',
   '查看外部賣場款項':
     'Check the payment on the external marketplace',
+  '還沒確認實際入帳，我先不寄件。':
+    'I haven\'t confirmed that the money is actually in my account. I won\'t ship it yet.',
+  '我相信對方，使用黑皮通寄件。':
+    'I\'ll trust them and ship the item through HPE.',
   '查無資料':
     'No record found',
   '交易編號':
