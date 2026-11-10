@@ -26,3 +26,36 @@
   .cibar-analysis .cibar-analysis-clue h2{font-size:var(--fs-body-lg)}
   .cibar-analysis-cta{min-height:48px}
 }
+
+/* ---- 三段式教育解析（AR4-19，目前只有情境四使用）-----------------------
+   Real <details>/<summary> disclosures, shipped open. See the `sections`
+   prop's comment in FraudClueAnalysis.jsx for why they are never closed by
+   default: both gestures on this screen are spoken for, so text behind a
+   closed fold would be unreachable on the glasses.
+
+   The marker is drawn by hand (::after, a rotating chevron) rather than
+   left to the browser's own triangle, which differs between Android
+   WebView versions and sits at a different baseline in each. list-style
+   on the summary and ::-webkit-details-marker both have to go, or some
+   WebViews draw their triangle as well as ours. */
+.cibar-analysis-section{width:min(100%,430px);border:1px solid rgba(255,255,255,.16);border-radius:16px;margin:0 auto 12px;background:rgba(255,255,255,.04);overflow:hidden}
+.cibar-analysis-section-summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 15px;font-size:var(--fs-body);font-weight:800;color:#fff;background:rgba(255,255,255,.07);-webkit-tap-highlight-color:transparent}
+.cibar-analysis-section-summary::-webkit-details-marker{display:none}
+.cibar-analysis-section-summary::after{content:'';flex:none;width:9px;height:9px;border-right:2px solid rgba(255,255,255,.7);border-bottom:2px solid rgba(255,255,255,.7);transform:rotate(45deg) translateY(-2px);transition:transform .18s ease}
+.cibar-analysis-section[open]>.cibar-analysis-section-summary::after{transform:rotate(-135deg) translateY(-2px)}
+.cibar-analysis-section-body{padding:12px 15px 14px}
+.cibar-analysis-section-body>.cibar-analysis-clues{margin:0}
+.cibar-analysis-section-lead{margin:0 0 10px;font-size:var(--fs-body-sm);line-height:1.6;color:#c3cfe0}
+
+/* 證據選擇回顧. Three states, and the colour is the only thing that differs:
+   held (green), partial (amber), never reached (grey). A gap is reported,
+   not scored - nothing here says the player failed. */
+.cibar-analysis-evidence{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.cibar-analysis-evidence-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.06);border-left:3px solid rgba(255,255,255,.25)}
+.cibar-analysis-evidence-row.is-complete{border-left-color:#31b77a}
+.cibar-analysis-evidence-row.is-incomplete{border-left-color:#e8a33d}
+.cibar-analysis-evidence-row.is-pending{border-left-color:rgba(255,255,255,.3)}
+.cibar-analysis-evidence-label{font-size:var(--fs-body-sm);font-weight:700;color:#f4f8ff;min-width:0;overflow-wrap:anywhere}
+.cibar-analysis-evidence-status{flex:none;font-size:var(--fs-caption);font-weight:700;color:#c3cfe0}
+.cibar-analysis-evidence-row.is-complete .cibar-analysis-evidence-status{color:#8fe3bb}
+.cibar-analysis-evidence-row.is-incomplete .cibar-analysis-evidence-status{color:#f3c87e}

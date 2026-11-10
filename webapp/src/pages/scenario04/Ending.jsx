@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { FraudClueAnalysis } from '../../components/outcome/FraudClueAnalysis';
-import { resetShoppingRoute } from '../../lib/shoppingStore';
+import { getShoppingState, resetShoppingRoute } from '../../lib/shoppingStore';
+import { buildEvidenceInventory } from '../../data/scenarioConfig';
 import { useT } from './i18n';
 
 // Screen 26 - 詐騙疑點分析. The teaching page analyses the SCAM, not the
@@ -62,15 +63,62 @@ const SIGNALS = {
   ],
 };
 
+// 第三段：下次怎麼辦. Not a scolding and not a checklist of things the
+// player got wrong - the same three moves, stated as what to do next time,
+// in the order a real dispute needs them.
+const NEXT_STEPS = [
+  {
+    title: '先留紀錄，再跟對方談',
+    text: '商品頁截圖、開箱照片、對話紀錄、付款與物流單據，在開口爭取之前就要先存下來。平台與警方能幫上忙的範圍，取決於你手上留下了什麼。',
+  },
+  {
+    title: '退款沒入帳，爭議就還沒結束',
+    text: '賣家同意退貨、商品已寄回、對方說「正在處理」，都不等於退款完成。以帳戶實際入帳為準，逾期就直接向平台申請介入，不要再等對方。',
+  },
+  {
+    title: '任何要你離開平台的要求都要拒絕',
+    text: '私下匯款、改用其他通訊軟體、直接取消訂單再補款，都是把平台保障拿掉。只要對方開始引導你離開平台，就保留證據並撥打 165。',
+  },
+];
+
 export function Ending() {
   const { route } = useParams();
   const t = useT();
   const signals = SIGNALS[route] || SIGNALS.health;
 
+  // 證據選擇回顧 (AR4-19). buildEvidenceInventory reads what this run
+  // actually ended up holding - the photos the player kept, the return they
+  // filed, the receipt they chased - so the section reports the player's own
+  // choices rather than a fixed list. Read once at render: the run is over
+  // by the time this screen exists, so nothing here can change under it.
+  const evidence = buildEvidenceInventory(getShoppingState());
+
   return (
     <FraudClueAnalysis
       scenarioId="package"
-      clues={signals.map(({ title, text }) => ({ title: t(title), note: t(text) }))}
+      // 三段式：這次的疑點 → 你留下了什麼 → 下次怎麼辦。
+      sections={[
+        {
+          id: 'clues',
+          title: t('一、這次的詐騙疑點'),
+          clues: signals.map(({ title, text }) => ({ title: t(title), note: t(text) })),
+        },
+        {
+          id: 'evidence',
+          title: t('二、證據選擇回顧'),
+          lead: t('以下是你在這次體驗中實際留下的紀錄。爭議能不能處理，取決於這幾項。'),
+          rows: evidence.map((row) => ({
+            ...row,
+            label: t(row.label),
+            statusLabel: t(row.statusLabel),
+          })),
+        },
+        {
+          id: 'next',
+          title: t('三、下次該怎麼做'),
+          clues: NEXT_STEPS.map(({ title, text }) => ({ title: t(title), note: t(text) })),
+        },
+      ]}
       quizTo="/scenario04-shopping/quiz"
       // The route is banked either way: `resetShoppingRoute` marks the product
       // just played as completed and clears the run, so the other product is

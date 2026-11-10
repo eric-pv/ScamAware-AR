@@ -754,6 +754,28 @@ export const EN = {
   // live here rather than in a shared dictionary.
   '是': 'True',
   '否': 'False',
+  '一、這次的詐騙疑點':
+    'Part 1 — The red flags in this case',
+  '二、證據選擇回顧':
+    'Part 2 — What you kept: an evidence review',
+  '三、下次該怎麼做':
+    'Part 3 — What to do next time',
+  '以下是你在這次體驗中實際留下的紀錄。爭議能不能處理，取決於這幾項。':
+    'Here is what this run actually left you holding. Whether a dispute can be resolved comes down to these.',
+  '尚未下單':
+    'No order placed',
+  '先留紀錄，再跟對方談':
+    'Save the record before you argue',
+  '商品頁截圖、開箱照片、對話紀錄、付款與物流單據，在開口爭取之前就要先存下來。平台與警方能幫上忙的範圍，取決於你手上留下了什麼。':
+    'Screenshots of the listing, unboxing photos, the chat log, payment and shipping records: save them before you say a word. What a platform or the police can do for you depends on what you kept.',
+  '退款沒入帳，爭議就還沒結束':
+    'Until the refund lands, the dispute is not over',
+  '賣家同意退貨、商品已寄回、對方說「正在處理」，都不等於退款完成。以帳戶實際入帳為準，逾期就直接向平台申請介入，不要再等對方。':
+    'The seller agreeing to a return, the item being sent back, "we are processing it" — none of these is a refund. Go by what actually reaches your account, and once it is overdue, escalate to the platform instead of waiting on the seller.',
+  '任何要你離開平台的要求都要拒絕':
+    'Refuse any request to leave the platform',
+  '私下匯款、改用其他通訊軟體、直接取消訂單再補款，都是把平台保障拿掉。只要對方開始引導你離開平台，就保留證據並撥打 165。':
+    'A private transfer, moving to another messaging app, cancelling the order and paying again — each one strips away the platform\'s protection. The moment someone starts steering you off the platform, keep the evidence and call 165.',
   '選項 {n}':
     'Option {n}',
   '選項 {n}，共 {total} 個':
