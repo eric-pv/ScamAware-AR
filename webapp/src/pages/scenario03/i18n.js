@@ -50,6 +50,13 @@ const STRINGS = {
       districtCourtFallback: '地方法院',
     },
     briefingDescription: '你將接到一通自稱是檢警機關的來電，對方以查案、資金監管為由，一步步要求你加入 LINE、提供帳戶資料並配合「調查」流程。',
+    hotline165: {
+      statusTitle: '通話中',
+      hotlineName: '165 反詐騙諮詢專線',
+      hotlineSubtitle: '內政部警政署',
+      connecting: '撥號中⋯⋯',
+      continueLabel: '結束通話',
+    },
     incomingCall: {
       statusTitleRinging: '來電中',
       callLabel: '來電',
@@ -317,6 +324,13 @@ const STRINGS = {
       districtCourtFallback: 'District Court',
     },
     briefingDescription: 'You will receive a call from someone claiming to be police or a prosecutor, and be walked step by step through adding them on LINE, handing over account details, and following a fake "investigation" under the pretext of a case and fund custody.',
+    hotline165: {
+      statusTitle: 'In call',
+      hotlineName: '165 Anti-Fraud Hotline',
+      hotlineSubtitle: 'National Police Agency',
+      connecting: 'Dialling...',
+      continueLabel: 'End call',
+    },
     incomingCall: {
       statusTitleRinging: 'Incoming Call',
       callLabel: 'Incoming Call',
@@ -574,6 +588,13 @@ const STRINGS = {
       districtCourtFallback: '地方法院',
     },
     briefingDescription: 'あなたは警察官または検察官を名乗る人物からの電話を受け、捜査や資金の保全を理由に、LINE の追加、口座情報の提供、そして偽の「捜査」手続きへの協力を一歩ずつ求められます。',
+    hotline165: {
+      statusTitle: '通話中',
+      hotlineName: '165 詐欺相談ホットライン',
+      hotlineSubtitle: '警察庁',
+      connecting: '発信中⋯⋯',
+      continueLabel: '通話を終了',
+    },
     incomingCall: {
       statusTitleRinging: '着信中',
       callLabel: '着信',

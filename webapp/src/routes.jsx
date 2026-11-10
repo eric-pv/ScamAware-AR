@@ -22,6 +22,7 @@ import { PoliceCallback } from './pages/scenario03/PoliceCallback';
 import { LineCustody } from './pages/scenario03/LineCustody';
 import { BankSite } from './pages/scenario03/BankSite';
 import { FinalDecision } from './pages/scenario03/FinalDecision';
+import { Hotline165 } from './pages/scenario03/Hotline165';
 import { Aftermath as PoliceAftermath } from './pages/scenario03/Aftermath';
 import { Ending as PoliceEnding } from './pages/scenario03/Ending';
 import { Analysis as PoliceAnalysis } from './pages/scenario03/Analysis';
@@ -211,6 +212,7 @@ export const routes = [
       { path: 'scenario03-police/line-custody', element: <RequireLocationProfile><LineCustody /></RequireLocationProfile> },
       { path: 'scenario03-police/bank', element: <RequireLocationProfile><BankSite /></RequireLocationProfile> },
       { path: 'scenario03-police/final', element: <RequireLocationProfile><FinalDecision /></RequireLocationProfile> },
+      { path: 'scenario03-police/hotline-165', element: <RequireLocationProfile><Hotline165 /></RequireLocationProfile> },
       { path: 'scenario03-police/aftermath', element: <RequireLocationProfile><PoliceAftermath /></RequireLocationProfile> },
       { path: 'scenario03-police/ending/:outcome', element: <RequireLocationProfile><PoliceEnding /></RequireLocationProfile> },
       { path: 'scenario03-police/analysis', element: <RequireLocationProfile><PoliceAnalysis /></RequireLocationProfile> },

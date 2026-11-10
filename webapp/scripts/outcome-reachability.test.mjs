@@ -86,6 +86,7 @@ const { GuaranteePage } = await import('../src/pages/scenario02/GuaranteePage.js
 const { RedWarning } = await import('../src/pages/scenario02/components/RedWarning.jsx');
 const { FinalDecision } = await import('../src/pages/scenario03/FinalDecision.jsx');
 const { Aftermath } = await import('../src/pages/scenario03/Aftermath.jsx');
+const { Hotline165 } = await import('../src/pages/scenario03/Hotline165.jsx');
 const { updateScenario03State } = await import('../src/lib/scenario03Store.js');
 const { BALANCE_TOTAL } = await import('../src/data/scenario03Config.js');
 const { buildPlatformSupportTree } = await import('../src/data/dialogueTrees/platformSupport.js');
@@ -326,10 +327,27 @@ function scenario03() {
       return to;
     };
     const viaAftermath = branch(LEFT);
-    const safe = branch(RIGHT);
-    assert.notEqual(viaAftermath, safe, 'both branches of scenario03\'s final decision go to the same place');
+    const viaHotline = branch(RIGHT);
+    assert.notEqual(viaAftermath, viaHotline, 'both branches of scenario03\'s final decision go to the same place');
     assert.equal(viaAftermath, '/scenario03-police/aftermath', 'the scammed branch no longer skips the aftermath');
-    assert.equal(safe, '/scenario03-police/ending/success', 'the safe branch no longer resolves on the decision itself');
+    assert.equal(viaHotline, '/scenario03-police/hotline-165', 'the safe branch plays the 165 call on its way to the ending');
+
+    // 撥打 165 is already decided on the screen above; the hotline cannot
+    // change the outcome, it only says why the decision was right. Follow it
+    // exactly as the scammed branch follows the aftermath: it plays itself
+    // out with nothing to press, then offers one way on, and that way is the
+    // 成功反詐 ending the decision screen used to reach directly.
+    const hotline = mount(Hotline165);
+    assert.equal(getCurrentARInteraction().mode, 'display', 'the hotline asks the player for nothing while it speaks');
+    settle();
+    const hungUp = getCurrentARInteraction();
+    assert.equal(hungUp.mode, 'single', 'the last hotline line offers exactly one way on');
+    assert.equal(hungUp.surfaceId, 'scenario03/hotline-165/continue');
+    assert.equal(performARInteraction(LEFT), false, 'the hotline adds no second choice');
+    assert.equal(performARInteraction(RIGHT), true);
+    const safe = navigatedTo('S03 hotline');
+    hotline.unmount();
+    assert.equal(safe, '/scenario03-police/ending/success', 'the safe branch still ends on 成功反詐');
 
     // 確認轉帳 leaves the run's state saying the transfer happened, which is
     // what lets the aftermath mount at all. Restore that here: `branch(RIGHT)`

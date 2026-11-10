@@ -699,6 +699,75 @@ export const SCENARIO03_DIALOGUES = {
       ],
     },
   },
+
+  // --- 165 反詐騙諮詢專線 ------------------------------------------------
+  // The one voice in this scenario that is NOT the scam. It exists because
+  // the 撥打 165 branch used to resolve straight to the success ending: the
+  // player made the right call and never heard what answering it sounds
+  // like. What 165 actually tells a caller - that the "case" is not in any
+  // system, and to keep the messages and transfer records - is the lesson
+  // the branch was missing, so it is said out loud here before the ending.
+  //
+  // No recordings: the 18 clips in public/assets/.../audio are the scam
+  // side's only, and that README is explicit that they are the sole voice
+  // source. These lines are spoken by the device instead (see
+  // pages/scenario03/Hotline165.jsx). Give them an `audioKey` once a real
+  // 165 recording exists and buildDialogueBeats picks it up with no other
+  // change.
+  hotline_165_greeting: {
+    speaker: 'hotline',
+    speakerLabel: { zh: '165 反詐騙諮詢專線', en: '165 Anti-Fraud Hotline', jp: '165 詐欺相談ホットライン' },
+    lines: {
+      zh: [
+        '您好，這裡是 165 反詐騙諮詢專線。請問您遇到什麼情況？',
+        '好的，請先不要轉帳，也不要再依照對方的指示操作。我幫您查一下。',
+      ],
+      en: [
+        'This is the 165 anti-fraud hotline. What has happened?',
+        'All right. Do not transfer anything, and stop following their instructions. Let me check for you.',
+      ],
+      jp: [
+        'こちらは165詐欺相談ホットラインです。どのような状況でしょうか。',
+        '分かりました。送金はせず、相手の指示にも従わないでください。確認します。',
+      ],
+    },
+  },
+  hotline_165_no_record: {
+    speaker: 'hotline',
+    speakerLabel: { zh: '165 反詐騙諮詢專線', en: '165 Anti-Fraud Hotline', jp: '165 詐欺相談ホットライン' },
+    lines: {
+      zh: [
+        '我這邊查詢過了，*系統查無此案件編號*，也*查無這支來電號碼*的任何辦案紀錄。',
+        '檢警機關*不會*用電話或 LINE 辦案，也*不會*要求您把存款匯到任何「監管帳戶」。監管帳戶這個說法本身就是詐騙。',
+      ],
+      en: [
+        'I have checked. *There is no such case number in the system*, and *no record of that caller number* in any investigation.',
+        'Police and prosecutors *do not* handle cases by phone or LINE, and *never* ask you to move your savings into a "supervision account". That term is itself the scam.',
+      ],
+      jp: [
+        '確認しました。*その事件番号はシステムにありません*。*その電話番号の捜査記録もありません*。',
+        '検察・警察が電話やLINEで捜査することは*ありません*。預金を「監査口座」に送るよう求めることも*ありません*。その言葉自体が詐欺です。',
+      ],
+    },
+  },
+  hotline_165_evidence: {
+    speaker: 'hotline',
+    speakerLabel: { zh: '165 反詐騙諮詢專線', en: '165 Anti-Fraud Hotline', jp: '165 詐欺相談ホットライン' },
+    lines: {
+      zh: [
+        '請您*保存證據*：通話紀錄、LINE 的對話與圖片、對方傳來的網址，還有任何轉帳或匯款紀錄，都不要刪除。',
+        '接著請就近到警察局報案，把這些資料一併提供。您今天先停下來查證，是正確的決定。',
+      ],
+      en: [
+        'Please *keep the evidence*: the call log, the LINE messages and images, the links they sent, and any transfer records. Do not delete any of it.',
+        'Then report it at your nearest police station and bring all of that with you. Stopping to check today was the right decision.',
+      ],
+      jp: [
+        '*証拠を保存してください*。通話履歴、LINEのやり取りと画像、送られたURL、送金記録。どれも削除しないでください。',
+        'その上で最寄りの警察署に届け出て、資料を提出してください。今日立ち止まって確認したことは正しい判断です。',
+      ],
+    },
+  },
 };
 
 // One entry per dialogue-driven scene. Strings are dialogue ids; objects of
@@ -745,6 +814,12 @@ export const SCENARIO03_SCRIPTS = {
   lineCustody: ['custody_task'],
   lineCustodyAccount: ['police_custody_account'],
   bankGuide: ['police_bank_guide'],
+  // 撥打 165 查證: played before the 成功反詐 ending, not instead of it.
+  hotline165: [
+    'hotline_165_greeting',
+    'hotline_165_no_record',
+    'hotline_165_evidence',
+  ],
 };
 
 function resolveSpeakerLabel(entry, session, lang) {
