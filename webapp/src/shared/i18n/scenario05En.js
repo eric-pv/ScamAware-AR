@@ -104,8 +104,6 @@ export const EN = {
     "I genuinely need this item, and I've been waiting patiently. Now you're saying you want to wait until the money reaches your account? I honestly don't know how much longer I'm supposed to wait...",
   '你不是說今天可以寄嗎？如果你不想賣，也可以直接跟我說，不用讓我一直等。':
     "Didn't you say you could ship it today? If you don't want to sell it anymore, you can just tell me instead of keeping me waiting.",
-  '還沒確認實際入帳，我先不寄件。': "I haven't confirmed that the money is actually in my account. I won't ship it yet.",
-  '我相信對方，使用黑皮通寄件。': "I'll trust them and ship the item through HPE.",
 
   // The buyer vanishes: the item has been delivered, the seller asks about
   // the money, and no one is there. Two plain status rows, no warning copy.
@@ -200,6 +198,12 @@ export const EN = {
     'No record of this payment',
   '你相信假客服，支付了所謂可退還的驗證金，也在尚未確認入帳時寄出商品。商品已送達，但買家帳號消失，SafeDeal 的收款頁查無這筆款項的任何紀錄。驗證金沒有退回，貨款也沒有入帳。':
     'You believed the fake support agent, paid a so-called refundable verification deposit, and shipped the item before confirming any money had arrived. The item was delivered, but the buyer\'s account is gone and SafeDeal\'s payment page has no record of this payment at all. The deposit was never returned, and the sale was never paid.',
+  '沒有官方訂單也沒有入帳，先停止交易。':
+    'There is no official order and no money has arrived. I am stopping this transaction.',
+  '相信對方，去寄件。':
+    'I\'ll trust them and ship it.',
+  '查看外部賣場款項':
+    'Check the payment on the external marketplace',
   '查無資料':
     'No record found',
   '交易編號':
@@ -267,7 +271,6 @@ export const EN = {
   '商品損失': 'Item lost',
   '總損失': 'Total loss',
   '未寄出': 'Not shipped',
-  '網站無法連線': 'Website inaccessible',
 
   // -----------------------------------------------------------------------
   // pages/scenario05/EndingCaught.jsx / EndingStopped.jsx / EndingScammed.jsx
