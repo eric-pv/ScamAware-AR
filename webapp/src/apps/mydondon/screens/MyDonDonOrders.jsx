@@ -6,7 +6,7 @@ import { useT } from '../i18n';
 // placed through MyDonDon would actually show up.
 //
 // `orders` is whatever the caller hands in. When it is empty the screen says
-// so ("目前沒有新的交易訂單"), which is a real answer from the marketplace,
+// so ("查無此筆訂單"), which is a real answer from the marketplace,
 // not a loading or error state - MyDonDon simply has no order on file. What
 // that answer means for the story, and where the player goes next, is the
 // caller's decision (`onBack`), not this screen's.
@@ -33,7 +33,7 @@ export function MyDonDonOrders({ orders = [], onBack }) {
           <div className="md-quoted-card">
             <div className="md-quoted-card-body">
               <span className="md-quoted-card-icon" aria-hidden="true"><PackageSearch size={20} /></span>
-              <div className="md-quoted-card-title">{t('目前沒有新的交易訂單')}</div>
+              <div className="md-quoted-card-title">{t('查無此筆訂單')}</div>
               <p>{t('目前沒有任何買家透過 MyDonDon 對這件商品下單。')}</p>
             </div>
           </div>

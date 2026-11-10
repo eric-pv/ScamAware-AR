@@ -28,22 +28,16 @@
 }
 
 /* ---- 三段式教育解析（AR4-19，目前只有情境四使用）-----------------------
-   Real <details>/<summary> disclosures, shipped open. See the `sections`
-   prop's comment in FraudClueAnalysis.jsx for why they are never closed by
-   default: both gestures on this screen are spoken for, so text behind a
-   closed fold would be unreachable on the glasses.
-
-   The marker is drawn by hand (::after, a rotating chevron) rather than
-   left to the browser's own triangle, which differs between Android
-   WebView versions and sits at a different baseline in each. list-style
-   on the summary and ::-webkit-details-marker both have to go, or some
-   WebViews draw their triangle as well as ours. */
-.cibar-analysis-section{width:min(100%,430px);border:1px solid rgba(255,255,255,.16);border-radius:16px;margin:0 auto 12px;background:rgba(255,255,255,.04);overflow:hidden}
-.cibar-analysis-section-summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 15px;font-size:var(--fs-body);font-weight:800;color:#fff;background:rgba(255,255,255,.07);-webkit-tap-highlight-color:transparent}
-.cibar-analysis-section-summary::-webkit-details-marker{display:none}
-.cibar-analysis-section-summary::after{content:'';flex:none;width:9px;height:9px;border-right:2px solid rgba(255,255,255,.7);border-bottom:2px solid rgba(255,255,255,.7);transform:rotate(45deg) translateY(-2px);transition:transform .18s ease}
-.cibar-analysis-section[open]>.cibar-analysis-section-summary::after{transform:rotate(-135deg) translateY(-2px)}
-.cibar-analysis-section-body{padding:12px 15px 14px}
+   Two levels and nothing to operate: the section title is the first level,
+   the clues or evidence rows inside it the second. There is no disclosure
+   and no toggle - see the `sections` prop's comment in FraudClueAnalysis.jsx
+   for why a control would be wrong here (both gestures on this screen are
+   already spoken for, so anything behind one is unreachable on the glasses).
+   The title earns its level from type weight, a tinted bar and the indent of
+   the body beneath it, not from a chevron. */
+.cibar-analysis-section{width:min(100%,430px);margin:0 auto 14px}
+.cibar-analysis-section-title{margin:0 0 9px;padding:9px 13px;border-radius:12px;background:rgba(37,208,255,.12);border-left:4px solid #25d0ff;color:#fff;font-size:var(--fs-title-sm);font-weight:900;line-height:1.35;overflow-wrap:anywhere}
+.cibar-analysis-section-body{padding-left:10px;border-left:1px solid rgba(255,255,255,.14)}
 .cibar-analysis-section-body>.cibar-analysis-clues{margin:0}
 .cibar-analysis-section-lead{margin:0 0 10px;font-size:var(--fs-body-sm);line-height:1.6;color:#c3cfe0}
 

@@ -29,20 +29,18 @@ export function FraudClueAnalysis({
   lede = [],
   clues,
   // Optional three-part form, used only by scenario 04 (AR4-19 asks for a
-  // 三段式教育解析 with a 證據選擇回顧 and folds that genuinely open). When
-  // given, these replace the flat clue list; every other scenario passes
-  // `clues` and renders exactly as it always has.
+  // 三段式教育解析 with a 證據選擇回顧). When given, these replace the flat
+  // clue list; every other scenario passes `clues` and renders exactly as it
+  // always has.
   //
-  // Each section is a real <details>/<summary>, not a div with an onClick:
-  // a native disclosure opens on tap AND on keyboard, is announced to a
-  // screen reader as a disclosure, and needs no state of its own. Every
-  // section ships OPEN. That is deliberate and is the whole reason this is
-  // safe on the glasses: the AR Interaction Contract has two gestures and
-  // both are spoken for here (LEFT 小測驗, RIGHT 體驗另一件商品), so a
-  // section that started closed would hold text no gesture could ever
-  // reveal. Open by default, a fold is a convenience for a reader holding
-  // the phone - they can collapse a part they have finished and open it
-  // again - and nothing is ever unreachable.
+  // Two levels, and nothing to operate: a section heading is the first
+  // level, its clues or evidence rows the second. No disclosure, no toggle,
+  // no state. An earlier version made each section a real <details> that
+  // opened and closed; it is gone because nothing on this screen should
+  // need operating to be read. Both gestures here are already spoken for
+  // (LEFT 小測驗, RIGHT 體驗另一件商品), so anything hidden behind a control
+  // is text the glasses can never reach - and the hierarchy alone is what
+  // the structure was for.
   sections,
   summary,
   quizTo,
@@ -98,8 +96,8 @@ export function FraudClueAnalysis({
         )}
 
         {sections?.map((section) => (
-          <details key={section.id} className="cibar-analysis-section" open>
-            <summary className="cibar-analysis-section-summary">{section.title}</summary>
+          <section key={section.id} className="cibar-analysis-section">
+            <h2 className="cibar-analysis-section-title">{section.title}</h2>
             <div className="cibar-analysis-section-body">
               {section.lead && <p className="cibar-analysis-section-lead">{section.lead}</p>}
 
@@ -129,7 +127,7 @@ export function FraudClueAnalysis({
                 </ul>
               )}
             </div>
-          </details>
+          </section>
         ))}
         {summary && <p className="cibar-analysis-summary">{summary}</p>}
       </div>

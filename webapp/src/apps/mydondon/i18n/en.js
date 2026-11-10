@@ -60,6 +60,8 @@ export const EN = {
 
   // apps/mydondon/screens/MyDonDonOrders.jsx
   '我的訂單': 'My Orders',
+  '查無此筆訂單':
+    'No such order found',
   '目前沒有新的交易訂單': 'No New Orders Right Now',
   '目前沒有任何買家透過 MyDonDon 對這件商品下單。': 'No buyer has placed an order for this item through MyDonDon.',
   '返回對話': 'Back to Conversation',
