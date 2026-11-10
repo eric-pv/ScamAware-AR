@@ -52,3 +52,9 @@
 .tfq-review-statement{font-size:var(--fs-body-sm);line-height:1.6;color:#f4f8ff;margin:0 0 4px}
 .tfq-review-verdict{font-size:var(--fs-caption);font-weight:700;color:#f4f8ff;margin:0 0 4px}
 .tfq-review-why{font-size:var(--fs-caption);color:#c3cfe0;line-height:1.6;margin:0}
+
+/* The running list of answered options sits above the open one, so it needs
+   a gap under it; the final tally sits below the last card instead of above
+   the list, where it reads as a total rather than a heading. */
+.tfq-review{margin-bottom:14px}
+.tfq-tally{margin:2px 0 0;font-weight:800;color:#f4f8ff}

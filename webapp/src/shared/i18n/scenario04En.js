@@ -790,19 +790,11 @@ export const EN = {
     'Once the seller has agreed to the return, you can safely wait for the refund to complete on its own.',
   '依賣家指示離開平台、用私下管道退款，這樣比較快。':
     'Follow the seller\'s instructions to leave the platform and settle the refund privately, because it is faster.',
-  '第 {n} 題，共 {total} 題': 'Statement {n} of {total}',
-  '答對 {n} / {total} 題': '{n} of {total} correct',
   '你的答案：{said}　正解：{answer}': 'You answered {said}　Correct answer: {answer}',
-  '收到的商品與商品頁宣稱明顯不符時，應該先保存商品頁、開箱照片與對話紀錄。':
-    'When what arrives clearly does not match the listing, the first thing to do is keep the listing page, the unboxing photos and the chat log.',
   '商品圖片、規格與評價都可能被刻意包裝。紀錄是後續爭議處理唯一的依據，收到不對版的商品時要先保存，再透過平台正式機制申請退貨退款。':
     'Photos, specifications and reviews can all be staged. Your records are the only thing a dispute can rest on, so keep them first, then file the return and refund through the platform\u2019s official process.',
-  '賣家已經同意退貨，就表示退款一定會完成。':
-    'Once the seller has agreed to the return, the refund is certain to go through.',
   '同意退貨不等於退款。本次情境裡賣家收到退貨後仍不斷以驗收、確認等理由拖延，最後失聯。退款未入帳前，爭議都還沒有結束。':
     'Agreeing to a return is not a refund. In this scenario the seller kept stalling on inspection and confirmation after the goods came back, and then went silent. Until the money is in your account, the dispute is not over.',
-  '賣家說走平台外的管道退款比較快，依他的指示操作沒有問題。':
-    'The seller says refunding outside the platform is faster, so following his instructions is fine.',
   '平台外完成的付款或交易，平台通常無法退款或賠償。對方要求離開平台、私下協調或直接取消訂單，都是把保障拿掉的手法；疑似詐騙應保留證據並撥打 165 或報案。':
     'A platform usually cannot refund or compensate for a payment made outside it. Being asked to leave the platform, settle privately or just cancel the order are all ways of stripping that protection away. If you suspect fraud, keep the evidence and call 165 or report it to the police.',
   // 詐騙疑點分析's second way out (AR4-19): this scenario has two products and

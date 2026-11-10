@@ -141,7 +141,7 @@ export function buildBuyerTree(product, lang) {
     // first (spec section B), a mandatory detour, not an optional choice.
     { id: 'buyer.s07.paid', messages: [timestamp('19:48'), buyer(tt('好了～我這邊已經付款完成了！你那邊應該可以看到交易資訊了。'))], autoNextNodeId: 'buyer.s07.toOrders' },
     { id: 'buyer.s07.toOrders', redirectTo: '/scenario05-atm/mydondon-orders', resumeNodeId: 'buyer.s07.playerNotice' },
-    // The player has just read "目前沒有新的交易訂單" on MyDonDon's own order
+    // The player has just read "查無此筆訂單" on MyDonDon's own order
     // page and tapped its explicit "返回對話" button (spec section C) to get
     // here. They speak first (spec section D) - this is a player message,
     // not a choice - and only after a beat does marketplaceBuyer reply.
@@ -176,8 +176,8 @@ export function buildBuyerTree(product, lang) {
       buyer(tt('我是真的有需要才跟你買的，也一直很有耐心在等。你現在又說要等入帳，我真的不知道還要等多久……')),
       buyer(tt('你不是說今天可以寄嗎？如果你不想賣，也可以直接跟我說，不用讓我一直等。')),
     ], choices: [
-      { id: 'a', label: tt('還沒確認實際入帳，我先不寄件。'), nextNodeId: 'buyer.exit.endingStopped', statePatch: { shipmentDecision: 'stopped' }, awareness: 'noPaymentReceived' },
-      { id: 'b', label: tt('我相信對方，使用黑皮通寄件。'), nextNodeId: 'buyer.s08.toShip', statePatch: { shipmentDecision: 'shipped' } },
+      { id: 'a', label: tt('沒有官方訂單也沒有入帳，先停止交易。'), nextNodeId: 'buyer.exit.endingStopped', statePatch: { shipmentDecision: 'stopped' }, awareness: 'noPaymentReceived' },
+      { id: 'b', label: tt('相信對方，去寄件。'), nextNodeId: 'buyer.s08.toShip', statePatch: { shipmentDecision: 'shipped' } },
     ]},
     { id: 'buyer.exit.endingStopped', redirectTo: '/scenario05-atm/ending-stopped' },
     // Real 黑皮通 logistics from here on - a real courier really does carry a
@@ -197,7 +197,7 @@ export function buildBuyerTree(product, lang) {
     // notice it themselves. Nothing here names the scam, warns, advises or
     // mentions 165; that is the debrief's job, several screens later.
     { id: 'buyer.s09.gone', messages: [system(tt('訊息傳送失敗'), { delay: 900 }), system(tt('此帳號已不存在'))], choices: [
-      { id: 'a', label: t('查看 {brand} 款項', lang, { brand: FAKE_TRADE_SITE_BRAND }), playerMessage: '', nextNodeId: 'buyer.s09.toSafeDeal' },
+      { id: 'a', label: tt('查看外部賣場款項'), playerMessage: '', nextNodeId: 'buyer.s09.toSafeDeal' },
     ]},
     { id: 'buyer.s09.toSafeDeal', redirectTo: '/scenario05-atm/order-gone' },
     { id: 'buyer.exit.endingCaught', redirectTo: '/scenario05-atm/ending-caught' },

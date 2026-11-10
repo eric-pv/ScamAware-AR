@@ -7,7 +7,7 @@ import { useARInteraction } from '../../lib/arInteraction';
 // The buyer never ordered through MyDonDon at all, so this run has no
 // official order to hand over: the app is given an empty order list and
 // says so. Finding nothing is the beat the story is built on - the player
-// reads "目前沒有新的交易訂單" and goes back to the conversation, where the
+// reads "查無此筆訂單" and goes back to the conversation, where the
 // fake buyer explains it away. Which step that return lands on is decided
 // here, not by the app: `replace` keeps the detour out of the history so
 // the chat resumes at its saved checkpoint (see buyer.s07.toOrders /

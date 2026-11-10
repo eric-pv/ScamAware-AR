@@ -136,7 +136,7 @@ export function FraudClueAnalysis({
       <div className={`cibar-analysis-cta-bar${hasAlt ? ' has-alt' : ''}`}>
         <Link className="cibar-analysis-cta" to={quizTo} onClick={onContinue}>{strings.quizCta}</Link>
         {hasAlt && (
-          <Link className="cibar-analysis-cta secondary" to={altTo} onClick={onAlt}>{altLabel}</Link>
+          <Link className="cibar-analysis-cta cibar-analysis-cta-alt" to={altTo} onClick={onAlt}>{altLabel}</Link>
         )}
       </div>
     </main>
