@@ -43,6 +43,7 @@
 | Release | Shell | Web Bundle | Date | PR | Commit | Type | Notes |
 | ------- | ----- | ---------- | ---- | -- | ------ | ---- | ----- |
 <!-- ota-release-rows -->
+| `1.13.0-20261110.007` | 1.2.12 | 1.13.0 | 2026-11-10 | #49 | `05677f0` | MINOR | Merge pull request #49 from eric-pv/claude/intelligent-franklin-sou8qm |
 | `1.12.0-20261110.006` | 1.2.12 | 1.12.0 | 2026-11-10 | #48 | `1be6ff8` | MINOR | Merge pull request #48 from eric-pv/claude/intelligent-franklin-sou8qm |
 | `1.11.3-20261110.005` | 1.2.12 | 1.11.3 | 2026-11-10 | #47 | `8e9d74f` | PATCH | Merge pull request #47 from claude/intelligent-franklin-sou8qm |
 | `1.11.2-20261110.004` | 1.2.12 | 1.11.2 | 2026-11-10 | #46 | `458a6ad` | PATCH | Merge pull request #46 from claude/intelligent-franklin-sou8qm |
