@@ -103,16 +103,16 @@ export const LOCATION_DATASET = [
     "county": "新北市",
     "district": "萬里區",
     "policeDepartment": "新北市政府警察局",
-    "prosecutorsOffice": "臺灣新北地方檢察署",
-    "districtCourt": "臺灣新北地方法院",
+    "prosecutorsOffice": "臺灣基隆地方檢察署",
+    "districtCourt": "臺灣基隆地方法院",
     "telephoneAreaCode": "02"
   },
   {
     "county": "新北市",
     "district": "金山區",
     "policeDepartment": "新北市政府警察局",
-    "prosecutorsOffice": "臺灣新北地方檢察署",
-    "districtCourt": "臺灣新北地方法院",
+    "prosecutorsOffice": "臺灣基隆地方檢察署",
+    "districtCourt": "臺灣基隆地方法院",
     "telephoneAreaCode": "02"
   },
   {
