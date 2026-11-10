@@ -15,8 +15,8 @@ export const LOCATION_DATASET = [
     "county": "臺北市",
     "district": "大同區",
     "policeDepartment": "臺北市政府警察局",
-    "prosecutorsOffice": "臺灣臺北地方檢察署",
-    "districtCourt": "臺灣臺北地方法院",
+    "prosecutorsOffice": "臺灣士林地方檢察署",
+    "districtCourt": "臺灣士林地方法院",
     "telephoneAreaCode": "02"
   },
   {
@@ -79,16 +79,16 @@ export const LOCATION_DATASET = [
     "county": "臺北市",
     "district": "內湖區",
     "policeDepartment": "臺北市政府警察局",
-    "prosecutorsOffice": "臺灣臺北地方檢察署",
-    "districtCourt": "臺灣臺北地方法院",
+    "prosecutorsOffice": "臺灣士林地方檢察署",
+    "districtCourt": "臺灣士林地方法院",
     "telephoneAreaCode": "02"
   },
   {
     "county": "臺北市",
     "district": "南港區",
     "policeDepartment": "臺北市政府警察局",
-    "prosecutorsOffice": "臺灣臺北地方檢察署",
-    "districtCourt": "臺灣臺北地方法院",
+    "prosecutorsOffice": "臺灣士林地方檢察署",
+    "districtCourt": "臺灣士林地方法院",
     "telephoneAreaCode": "02"
   },
   {
@@ -127,8 +127,8 @@ export const LOCATION_DATASET = [
     "county": "新北市",
     "district": "汐止區",
     "policeDepartment": "新北市政府警察局",
-    "prosecutorsOffice": "臺灣新北地方檢察署",
-    "districtCourt": "臺灣新北地方法院",
+    "prosecutorsOffice": "臺灣士林地方檢察署",
+    "districtCourt": "臺灣士林地方法院",
     "telephoneAreaCode": "02"
   },
   {

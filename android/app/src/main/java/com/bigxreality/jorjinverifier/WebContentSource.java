@@ -57,7 +57,7 @@ final class WebContentSource {
      * The published site, which is also where the OTA pointer file lives. Not loaded by the
      * WebView - nothing in the experience is ever fetched from here.
      */
-    static final String SITE_ROOT = "https://magician-eric.github.io/ScamAware-AR/";
+    static final String SITE_ROOT = "https://eric-pv.github.io/ScamAware-AR/";
 
     /**
      * The one URL this app fetches over the network: a few hundred bytes saying which web bundle

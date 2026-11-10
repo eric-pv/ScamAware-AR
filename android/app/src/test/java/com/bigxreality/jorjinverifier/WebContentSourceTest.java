@@ -91,7 +91,7 @@ public class WebContentSourceTest {
         WebContentSource source = WebContentSource.local();
         assertFalse(source.owns("https://appassets.androidplatform.net/other/index.html"));
         assertFalse(source.owns("file:///android_asset/cibar/index.html"));
-        assertFalse(source.owns("https://magician-eric.github.io/ScamAware-AR/"));
+        assertFalse(source.owns("https://eric-pv.github.io/ScamAware-AR/"));
     }
 
     /**
