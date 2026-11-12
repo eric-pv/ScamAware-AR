@@ -290,7 +290,8 @@ test('5-13. every screen still offers exactly the same ways out, as events', () 
 test('5-13. the splash still advances on its own beat and only reports it', async () => {
   const splash = stripComments(await read('apps/blackpi/screens/Splash.jsx'));
   assert.match(splash, /const SPLASH_HOLD_MS = 1100;/, 'the 1.1s hold is the product behaviour');
-  assert.match(splash, /setTimeout\(\(\) => advance\.current\?\.\(\), SPLASH_HOLD_MS\)/);
+  // 體驗節奏 (lib/experiencePace.js) scales the hold in 快速; the hold itself is unchanged.
+  assert.match(splash, /setTimeout\(\(\) => advance\.current\?\.\(\), paced\(SPLASH_HOLD_MS\)\)/);
   assert.match(splash, /advance\.current = onIntroComplete/, 'an inline host arrow must not restart the beat');
 });
 

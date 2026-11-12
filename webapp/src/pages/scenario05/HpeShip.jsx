@@ -7,6 +7,7 @@ import { getProduct } from '../../apps/mydondon';
 import { useScenario05State } from '../../lib/scenario05Store';
 import { useStageClassName } from '../../shell/StageClassContext';
 import { useT, useScenario05Lang } from './i18n';
+import { paced } from '../../lib/experiencePace';
 
 const STEP_GAP_MS = 700;
 const STEPS = ['shipped', 'inTransit', 'delivered'];
@@ -53,8 +54,8 @@ export function HpeShip() {
 
   function runShipMontage() {
     update({ shipStatus: 'shipped' });
-    window.setTimeout(() => update({ shipStatus: 'inTransit' }), STEP_GAP_MS);
-    window.setTimeout(() => update({ shipStatus: 'delivered' }), STEP_GAP_MS * 2);
+    window.setTimeout(() => update({ shipStatus: 'inTransit' }), paced(STEP_GAP_MS));
+    window.setTimeout(() => update({ shipStatus: 'delivered' }), paced(STEP_GAP_MS * 2));
   }
 
   const primaryAction = status === 'delivered' ? () => navigate('/scenario05-atm/chat') : runShipMontage;

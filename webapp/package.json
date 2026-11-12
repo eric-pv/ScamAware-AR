@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "npm run validate:boundaries && npm run validate:shared-ui-ownership && npm run validate:outcome-ownership && npm run validate:asset-ownership && npm run validate:localized-assets && npm run test:localized-assets && npm run validate:i18n && npm run validate:zh-place-names && npm run test:localization-coverage && npm run test:location-localization && npm run test:dynamic-localization && npm run validate:dialogue && npm run validate:fake-phone && npm run validate:police-organization && npm run test:outcome-reachability",
+    "prebuild": "npm run validate:boundaries && npm run validate:shared-ui-ownership && npm run validate:outcome-ownership && npm run validate:asset-ownership && npm run validate:localized-assets && npm run test:localized-assets && npm run validate:i18n && npm run validate:zh-place-names && npm run test:localization-coverage && npm run test:location-localization && npm run test:dynamic-localization && npm run validate:dialogue && npm run validate:fake-phone && npm run validate:police-organization && npm run test:outcome-reachability && npm run test:experience-pace",
     "build": "vite build",
     "build:image-targets": "node scripts/compile-image-targets.mjs",
     "lint": "oxlint",
@@ -54,6 +54,7 @@
     "test:glasses-key-gestures": "node --import=./scripts/register-gesture-contract-loaders.mjs --test ./scripts/glasses-key-gestures.test.mjs",
     "test:glasses-presence": "node --import=./scripts/register-jsx-loader.mjs --test ./scripts/glasses-presence.test.mjs",
     "test:environment-check": "node --test ./scripts/environment-check.test.mjs",
+    "test:experience-pace": "node --test ./scripts/experience-pace.test.mjs",
     "test:staff-gesture-tools": "node --import=./scripts/register-jsx-loader.mjs --test ./scripts/staff-gesture-tools.test.mjs",
     "test:ar-interaction-migration": "node --import=./scripts/register-gesture-contract-loaders.mjs --test ./scripts/ar-interaction-migration.test.mjs",
     "test:ar-dual-visual-order": "node --test ./scripts/ar-dual-visual-order.test.mjs",

@@ -442,9 +442,9 @@ test('12. the post-registration screen returns to LINE when the player says so',
 // this change was about who ends a visit, not about the platform's own
 // processing/creating pauses.
 test('12b. the platform\'s own processing beats are untouched', async () => {
-  assert.match(stripComments(await readApp('DepositPage.jsx')), /\}, 1200\);/, '入金處理中 still lasts 1.2s');
-  assert.match(stripComments(await readApp('WithdrawalPage.jsx')), /setTimeout\(\(\) => setPhase\('failed'\), 1500\)/,
+  assert.match(stripComments(await readApp('DepositPage.jsx')), /\}, paced\(1200\)\);/, '入金處理中 still lasts 1.2s');
+  assert.match(stripComments(await readApp('WithdrawalPage.jsx')), /setTimeout\(\(\) => setPhase\('failed'\), paced\(1500\)\)/,
     '提領申請審核中 still lasts 1.5s');
-  assert.match(stripComments(await readApp('PlatformRegister.jsx')), /setTimeout\(\(\) => reportRegistrationComplete\(\), 800\)/,
+  assert.match(stripComments(await readApp('PlatformRegister.jsx')), /setTimeout\(\(\) => reportRegistrationComplete\(\), paced\(800\)\)/,
     '帳戶建立成功 still hands off to 平台首頁 after 0.8s');
 });

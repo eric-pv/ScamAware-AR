@@ -2,6 +2,7 @@ import { useEffect, useInsertionEffect, useRef } from 'react';
 import { useStageClassName } from '../../../shell/StageClassContext';
 import { ShoppingBag } from 'lucide-react';
 import { useT } from '../i18n';
+import { paced } from '../../../lib/experiencePace';
 
 // Screen 01 - Splash. Holds the logo for a beat and then reports that the
 // intro is over; where that lands is decided by whoever mounts the App.
@@ -22,7 +23,7 @@ export function Splash({ onIntroComplete }) {
   }, [onIntroComplete]);
 
   useEffect(() => {
-    const timer = setTimeout(() => advance.current?.(), SPLASH_HOLD_MS);
+    const timer = setTimeout(() => advance.current?.(), paced(SPLASH_HOLD_MS));
     return () => clearTimeout(timer);
   }, []);
 

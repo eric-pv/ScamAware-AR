@@ -33,7 +33,7 @@ function warnMissing(src, reason) {
   console.warn(`[scenario03] 找不到或無法播放語音檔：${src}（${reason}）→ 改用字幕計時播放`);
 }
 
-// `rate` is how fast the recording plays: 1 is the voice as recorded, 1.82 is
+// `rate` is how fast the recording plays: 1 is the voice as recorded, 1.5 is
 // 快速節奏. It is applied to the element, NOT simulated by shortening the
 // subtitle timer - that distinction is the whole point. useScriptPlayer ends a
 // recorded beat on `audio.progress` (currentTime / duration), and raising the

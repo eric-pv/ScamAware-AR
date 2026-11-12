@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { saveDialogueCheckpoint, loadDialogueCheckpoint, saveScenario05State } from '../../lib/scenario05Store';
+import { paced } from '../../lib/experiencePace';
 
 // ---------------------------------------------------------------------------
 // Scenario05 dialogue data shapes (plain JS + JSDoc, same convention as
@@ -74,7 +75,7 @@ export function useDialogueEngine(nodesById, startNodeId, { screenKey, onRedirec
   const timelineRef = useRef(timeline);
 
   function schedule(fn, ms) {
-    const t = setTimeout(fn, ms);
+    const t = setTimeout(fn, paced(ms));
     timeoutsRef.current.push(t);
     return t;
   }

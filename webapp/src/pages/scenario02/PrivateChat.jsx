@@ -20,6 +20,7 @@ import { t, useT, useScenario02Lang, getDatingLeadName } from './i18n';
 import { getVisualAssetUrl, getVisualVideo } from '../../experience/characters/visuals';
 import { GUESTHOUSE_ROOM_IMG, GUESTHOUSE_BOOKING_IMG_BY_LANG } from './guesthousePhotos';
 import './PrivateChat.css';
+import { paced } from '../../lib/experiencePace';
 
 // The three clips {datingLead} sends, keyed by the id her dialogue nodes use.
 //
@@ -851,7 +852,7 @@ export function PrivateChat() {
   // only resumes once completeImage() actually fires.
   useEffect(() => {
     if (!lightboxItem) return undefined;
-    const t = setTimeout(() => closeImage(), lightboxItem.displayDuration ?? 5000);
+    const t = setTimeout(() => closeImage(), paced(lightboxItem.displayDuration ?? 5000));
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lightboxItem]);
@@ -891,8 +892,8 @@ export function PrivateChat() {
       setTimeout(() => {
         setReturningTip(false);
         setOpeningPlatform(true);
-        timers.push(setTimeout(() => navigate(last.route), 1500));
-      }, 1200),
+        timers.push(setTimeout(() => navigate(last.route), paced(1500)));
+      }, paced(1200)),
     );
     return () => timers.forEach(clearTimeout);
   }, [timeline, watchedVideoIds, navigate]);
@@ -921,7 +922,7 @@ export function PrivateChat() {
       setLinkClickable(false);
       return undefined;
     }
-    const t = setTimeout(() => setLinkClickable(true), 1500);
+    const t = setTimeout(() => setLinkClickable(true), paced(1500));
     return () => clearTimeout(t);
   }, [pendingLink]);
 
@@ -929,7 +930,7 @@ export function PrivateChat() {
     if (!pendingLink || !linkClickable) return;
     savePrivateChatCheckpoint(timeline, pendingLink.next, watchedVideoIds);
     setOpeningPlatform(true);
-    setTimeout(() => navigate('/scenario02-romance/platform-landing'), 1500);
+    setTimeout(() => navigate('/scenario02-romance/platform-landing'), paced(1500));
   }
 
   // AR Interaction Contract. This one screen walks through every geometry the

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Lock } from 'lucide-react';
 import { PoliceFrame } from './components/PoliceFrame';
 import { getOrCreateScenarioSession } from '../../lib/session/ScenarioSessionFactory';
-import { usePaceMultiplier } from '../../lib/scenario03Store';
+import { usePaceMultiplier } from '../../lib/experiencePace';
 import { formatTaiwanDate, formatTaiwanTime } from '../../lib/dateTimeService';
 import { useARInteraction } from '../../lib/arInteraction';
 

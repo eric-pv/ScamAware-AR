@@ -22,6 +22,7 @@ import { t, useT, useScenario02Lang, getDatingCharacterName } from './i18n';
 import { getVisualAssetUrl } from '../../experience/characters/visuals';
 import { useARInteraction } from '../../lib/arInteraction';
 import { AUTO_START_CHAT_MS, useAutoAdvance } from '../../lib/autoAdvance';
+import { paced } from '../../lib/experiencePace';
 
 // Every value `phase` can ever hold - kept as one place to check against
 // rather than loose string literals scattered through the file.
@@ -164,7 +165,7 @@ function MiniMatchChat({ person, arc, onDone }) {
 
   useEffect(() => {
     if (step !== 'ending') return undefined;
-    const t = setTimeout(() => setStep('closing'), 1500);
+    const t = setTimeout(() => setStep('closing'), paced(1500));
     return () => clearTimeout(t);
   }, [step]);
 
@@ -174,7 +175,7 @@ function MiniMatchChat({ person, arc, onDone }) {
     setChosenLabel(arc.choices[i].label);
     setChosenReply(arc.choices[i].reply);
     setStep('reply');
-    setTimeout(() => setStep('ending'), 1400);
+    setTimeout(() => setStep('ending'), paced(1400));
   }
 
   // AR Interaction Contract: the two suggested replies are a real two-option

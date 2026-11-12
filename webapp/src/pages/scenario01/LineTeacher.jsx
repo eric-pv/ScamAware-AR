@@ -8,6 +8,7 @@ import { useStageClassName } from '../../shell/StageClassContext';
 import { useT, getScenario01SenderName } from './i18n';
 import { getScenario01CharacterBySlot } from '../../lib/scenario01Characters';
 import { useARInteraction } from '../../lib/arInteraction';
+import { paced } from '../../lib/experiencePace';
 
 // This page reimplements its own scripted-chat engine (rather than reusing
 // useTypedMessages) because it needs branching reply paths, same as the
@@ -45,7 +46,7 @@ const ROUTES = {
 };
 
 function wait(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, paced(ms)));
 }
 
 // Same LINE chrome as scenario02's PrivateChat (.line-app/.line-header/

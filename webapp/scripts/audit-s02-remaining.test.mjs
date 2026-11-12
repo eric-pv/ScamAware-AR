@@ -283,7 +283,7 @@ test('the LINE photo lightbox has no way out but its own timer', async () => {
   assert.match(lightbox[0], /aria-hidden="true"/, 'the ✕ glyph stays, as decoration');
   assert.doesNotMatch(s, /<PhotoLightbox[^/]*onClose/, 'the call site stops passing one too');
   // The timer that does close it is still there, still per-image.
-  assert.match(s, /setTimeout\(\(\) => closeImage\(\), lightboxItem\.displayDuration \?\? 5000\)/,
+  assert.match(s, /setTimeout\(\(\) => closeImage\(\), paced\(lightboxItem\.displayDuration \?\? 5000\)\)/,
     'the per-image display timer is the one way out');
 
   const css = await src('pages/scenario02/PrivateChat.css');

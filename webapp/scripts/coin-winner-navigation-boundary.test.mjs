@@ -156,7 +156,7 @@ test('every return to LINE is the player pressing the same bar', async () => {
 // The platform's own pauses are not returns and were never the complaint:
 // they are the fake app pretending to work, and they keep their timings.
 test('the platform\'s own processing beats keep their original timings', async () => {
-  assert.match(stripComments(await read('DepositPage.jsx')), /\}, 1200\);/);
-  assert.match(stripComments(await read('WithdrawalPage.jsx')), /setTimeout\(\(\) => setPhase\('failed'\), 1500\)/);
-  assert.match(stripComments(await read('PlatformRegister.jsx')), /setTimeout\(\(\) => reportRegistrationComplete\(\), 800\)/);
+  assert.match(stripComments(await read('DepositPage.jsx')), /\}, paced\(1200\)\);/);
+  assert.match(stripComments(await read('WithdrawalPage.jsx')), /setTimeout\(\(\) => setPhase\('failed'\), paced\(1500\)\)/);
+  assert.match(stripComments(await read('PlatformRegister.jsx')), /setTimeout\(\(\) => reportRegistrationComplete\(\), paced\(800\)\)/);
 });

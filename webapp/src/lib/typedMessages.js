@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { paced } from './experiencePace';
 
 // Port of the old js/app.js typeMessages() scripted-chat engine as a hook.
 // Old code drove doneSelector/replySelector element reveals directly on the
@@ -17,7 +18,7 @@ export function useTypedMessages(messages, { messageDelay = 1700, typingDelay = 
     let cancelled = false;
     const timeouts = [];
     const schedule = (fn, ms) => {
-      const id = setTimeout(fn, ms);
+      const id = setTimeout(fn, paced(ms));
       timeouts.push(id);
     };
 

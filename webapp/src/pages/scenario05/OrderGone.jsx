@@ -6,6 +6,7 @@ import { SuqubianSiteHeader } from './components/SuqubianSiteHeader';
 import { useARInteraction } from '../../lib/arInteraction';
 import { FAKE_TRADE_SITE_BRAND, FAKE_TRADE_SITE_DOMAIN } from '../../data/scenario05FakeSite';
 import { useT } from './i18n';
+import { paced } from '../../lib/experiencePace';
 
 const PROCESSING_MS = 1200;
 
@@ -48,7 +49,7 @@ export function OrderGone() {
   const seeResult = () => navigate('/scenario05-atm/ending-scammed');
 
   useEffect(() => {
-    const timer = setTimeout(() => setProcessing(false), PROCESSING_MS);
+    const timer = setTimeout(() => setProcessing(false), paced(PROCESSING_MS));
     return () => clearTimeout(timer);
   }, []);
 

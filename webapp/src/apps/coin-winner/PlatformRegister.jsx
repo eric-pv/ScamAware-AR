@@ -4,6 +4,7 @@ import { useEventCallback } from './useEventCallback';
 import { DEMO_PHONE_NUMBER } from '../../lib/constants';
 import { useT } from './i18n';
 import { useARInteraction } from '../../lib/arInteraction';
+import { paced } from '../../lib/experiencePace';
 
 // Keeping the phone's own keyboard from ever popping up matters here, so
 // this is a "simulated quick sign-up": every field is pre-filled and purely
@@ -46,8 +47,8 @@ export function PlatformRegister({ onAccountCreated, onRegistrationComplete, ref
     setTimeout(() => {
       setStatus('done');
       reportAccountCreated();
-      setTimeout(() => reportRegistrationComplete(), 800);
-    }, 900);
+      setTimeout(() => reportRegistrationComplete(), paced(800));
+    }, paced(900));
   }
 
   return (

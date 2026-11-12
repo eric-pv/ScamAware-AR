@@ -6,6 +6,7 @@ import { AI_ARBITRAGE_STRATEGY, STRATEGY_ACTIVATION_AMOUNT } from './catalog';
 import { useCountUp } from '../../lib/useCountUp';
 import { useT } from './i18n';
 import { useARInteraction } from '../../lib/arInteraction';
+import { paced } from '../../lib/experiencePace';
 
 // Section 十二/十三: purely simulated deposit - no real bank account, wallet
 // address, QR code, or transfer instructions anywhere on this page.
@@ -32,7 +33,7 @@ export function DepositPage({ onDepositComplete }) {
     setTimeout(() => {
       setStatus('success');
       setAnimatedTarget(STRATEGY_ACTIVATION_AMOUNT);
-    }, 1200);
+    }, paced(1200));
   }
 
   // The success card used to report itself finished 2.4s after it appeared,
