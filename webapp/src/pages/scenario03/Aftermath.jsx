@@ -10,7 +10,8 @@ import {
   getOrCreateScenarioSession,
   getProsecutorIdentity,
 } from '../../lib/session/ScenarioSessionFactory';
-import { getScenario03State, updateScenario03State, usePaceMultiplier } from '../../lib/scenario03Store';
+import { getScenario03State, updateScenario03State } from '../../lib/scenario03Store';
+import { usePaceMultiplier } from '../../lib/experiencePace';
 import { buildScenario03Script } from '../../data/scenario03Dialogues';
 import {
   BALANCE_TOTAL,

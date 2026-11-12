@@ -12,6 +12,7 @@
 // action running first (which changes the stage or unmounts the screen)
 // cancels it.
 import { useEffect, useRef } from 'react';
+import { paced } from './experiencePace';
 
 /** A ringing call is answered after this long: about two rings, and the caller ID read. */
 export const AUTO_ANSWER_CALL_MS = 3000;
@@ -30,7 +31,7 @@ export function useAutoAdvance(action, delayMs, enabled = true) {
     let cancelled = false;
     const timer = setTimeout(() => {
       if (!cancelled && typeof actionRef.current === 'function') actionRef.current();
-    }, delayMs);
+    }, paced(delayMs));
     return () => {
       cancelled = true;
       clearTimeout(timer);

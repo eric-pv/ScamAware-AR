@@ -6,6 +6,7 @@ import { HpeTrackingScreen } from '../../apps/hpe-logistics';
 import { feedback } from '../../lib/feedback';
 import { useT } from './i18n';
 import { useARInteraction } from '../../lib/arInteraction';
+import { paced } from '../../lib/experiencePace';
 
 const STEP_GAP_MS = 700;
 // Screen 17 - 退貨物流. "查看最新物流" steps through the same sequence,
@@ -21,7 +22,7 @@ export function ReturnLogistics() {
   function runLogisticsMontage() {
     setMontaging(true);
     window.setTimeout(() => update({ returnStatus: 'shipped' }), 0);
-    window.setTimeout(() => update({ returnStatus: 'inTransit' }), STEP_GAP_MS);
+    window.setTimeout(() => update({ returnStatus: 'inTransit' }), paced(STEP_GAP_MS));
     window.setTimeout(() => {
       // The signed-for record is now part of the tracking history - the
       // evidence screen reads it from here rather than asking the player to
@@ -30,7 +31,7 @@ export function ReturnLogistics() {
       update({ returnStatus: 'received' });
       feedback('delivered');
       setMontaging(false);
-    }, STEP_GAP_MS * 3 + 150);
+    }, paced(STEP_GAP_MS * 3 + 150));
   }
 
   const received = state.returnStatus === 'received';

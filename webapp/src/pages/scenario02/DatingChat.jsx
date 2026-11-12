@@ -9,6 +9,7 @@ import { MeetUChatSurface, SuggestedReplies } from '../../apps/meetu';
 import { t, useT, useScenario02Lang, getDatingLeadName } from './i18n';
 import { getVisualAssetUrl } from '../../experience/characters/visuals';
 import { useARInteraction } from '../../lib/arInteraction';
+import { paced } from '../../lib/experiencePace';
 
 const DATING_LEAD_PHOTO = getVisualAssetUrl('dating_visual_03');
 
@@ -149,7 +150,7 @@ export function DatingChat() {
 
   function joinLine() {
     setJoinPhase('tip');
-    tipTimerRef.current = setTimeout(() => setJoinPhase('ready'), 4000);
+    tipTimerRef.current = setTimeout(() => setJoinPhase('ready'), paced(4000));
   }
 
   function dismissTip() {

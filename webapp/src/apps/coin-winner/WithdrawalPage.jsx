@@ -4,6 +4,7 @@ import { ReturnBar } from './ReturnBar';
 import { useEventCallback } from './useEventCallback';
 import { useT } from './i18n';
 import { useARInteraction } from '../../lib/arInteraction';
+import { paced } from '../../lib/experiencePace';
 
 // Section 十七/十八: withdrawal request followed by the scripted failure
 // (a "resource security verification" demand). The failure card is the whole
@@ -24,7 +25,7 @@ export function WithdrawalPage({ portfolio = {}, onWithdrawalFailed }) {
 
   function requestWithdrawal() {
     setPhase('reviewing');
-    setTimeout(() => setPhase('failed'), 1500);
+    setTimeout(() => setPhase('failed'), paced(1500));
   }
 
   function requestReturn() {

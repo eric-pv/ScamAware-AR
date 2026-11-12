@@ -11,7 +11,7 @@ import { getOfficerIdentity, getOrCreateScenarioSession, getLineAccountDisplayNa
 import { buildScenario03Script } from '../../data/scenario03Dialogues';
 import { sceneStartTime } from '../../data/scenario03Config';
 import { playSound } from '../../lib/scenario03Feedback';
-import { usePaceMultiplier } from '../../lib/scenario03Store';
+import { usePaceMultiplier } from '../../lib/experiencePace';
 import { getScenario03Lang, getScenario03Strings } from './i18n';
 import { useARInteraction } from '../../lib/arInteraction';
 import { CaseNumber } from './components/CaseNumber';

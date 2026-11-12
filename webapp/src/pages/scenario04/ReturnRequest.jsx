@@ -6,6 +6,7 @@ import { applyEffects, useShoppingState } from '../../lib/shoppingStore';
 import { AssetImage } from '../../apps/blackpi';
 import { useT } from './i18n';
 import { useARInteraction } from '../../lib/arInteraction';
+import { paced } from '../../lib/experiencePace';
 
 const RETURN_COPY = {
   health: {
@@ -71,7 +72,7 @@ export function ReturnRequest() {
     update({ returnStatus: 'evidenceUploaded', disputeStatus: 'returnRequested', returnEvidenceAssets: evidenceAssets });
     timeoutRef.current = window.setTimeout(() => {
       navigate(`/scenario04-shopping/return-ack/${route}`);
-    }, 800);
+    }, paced(800));
   }
 
   // AR Interaction Contract: one story action - 提交退貨申請 - and once it is

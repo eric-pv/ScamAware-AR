@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { paced } from './experiencePace';
 
 // Generic branching-chat engine shared by scenario02's DatingChat and
 // PrivateChat. Both need more than useTypedMessages' flat script or
@@ -41,7 +42,7 @@ export function useDialogueTree(
   const timeoutsRef = useRef([]);
 
   function schedule(fn, ms) {
-    const t = setTimeout(fn, ms);
+    const t = setTimeout(fn, paced(ms));
     timeoutsRef.current.push(t);
     return t;
   }

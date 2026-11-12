@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useStageClassName } from '../../shell/StageClassContext';
 import { MeetUHomeScreenTile } from '../../apps/meetu';
 import { useARInteraction } from '../../lib/arInteraction';
+import { paced } from '../../lib/experiencePace';
 
 const NEXT_ROUTE = '/scenario02-romance/app-landing';
 const AUTO_OPEN_MS = 1800;
@@ -24,7 +25,7 @@ export function PhoneDesktop() {
   }, []);
 
   useEffect(() => {
-    const openTimer = setTimeout(() => setOpening(true), AUTO_OPEN_MS);
+    const openTimer = setTimeout(() => setOpening(true), paced(AUTO_OPEN_MS));
     return () => clearTimeout(openTimer);
   }, []);
 

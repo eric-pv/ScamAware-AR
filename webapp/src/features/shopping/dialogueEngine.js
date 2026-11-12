@@ -8,6 +8,7 @@ import {
   loadDialogueCheckpoint,
   getShoppingState,
 } from '../../lib/shoppingStore';
+import { paced } from '../../lib/experiencePace';
 
 // ---------------------------------------------------------------------------
 // Scenario04 dialogue data shapes (plain JS + JSDoc - this project is a plain
@@ -94,7 +95,7 @@ export function useDialogueEngine(nodesById, startNodeId, { screenKey, waits, au
   const timeoutsRef = useRef([]);
 
   function schedule(fn, ms) {
-    const t = setTimeout(fn, ms);
+    const t = setTimeout(fn, paced(ms));
     timeoutsRef.current.push(t);
     return t;
   }

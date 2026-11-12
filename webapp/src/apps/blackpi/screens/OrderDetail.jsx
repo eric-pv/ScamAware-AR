@@ -10,6 +10,7 @@ import { AssetImage } from '../components/AssetImage';
 // rather than drawing a second one, the same way pages/scenario04/
 // ReturnLogistics.jsx already reuses that App's tracking screen.
 import { HpeLogo } from '../../hpe-logistics';
+import { paced } from '../../../lib/experiencePace';
 
 const STEPS = [
   { key: 'paid', label: '已付款' },
@@ -56,17 +57,17 @@ export function OrderDetail({
   function runLogisticsMontage() {
     setMontaging(true);
     MONTAGE_SEQUENCE.forEach((status, i) => {
-      window.setTimeout(() => onDeliveryStatusChange?.(status), i * STEP_GAP_MS);
+      window.setTimeout(() => onDeliveryStatusChange?.(status), paced(i * STEP_GAP_MS));
     });
     const afterSequence = MONTAGE_SEQUENCE.length * STEP_GAP_MS;
     window.setTimeout(() => {
       setDeliveryNotice(true);
       feedback('delivered');
-    }, afterSequence + 150);
+    }, paced(afterSequence + 150));
     window.setTimeout(() => {
       onDeliveryStatusChange?.('delivered');
       setMontaging(false);
-    }, afterSequence + STEP_GAP_MS);
+    }, paced(afterSequence + STEP_GAP_MS));
   }
 
   // AR Interaction Contract: this screen only ever offers one thing at a time -

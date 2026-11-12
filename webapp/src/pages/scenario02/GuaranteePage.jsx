@@ -5,6 +5,7 @@ import { useStageClassName } from '../../shell/StageClassContext';
 import { useSaveScenario02Progress, usePlatformState } from '../../lib/scenario02Store';
 import { useT } from './i18n';
 import { useARInteraction } from '../../lib/arInteraction';
+import { paced } from '../../lib/experiencePace';
 
 // Section 二十四: the "verification top-up" page reached after the second
 // red warning. No real bank/wallet/QR/payment instructions - clicking
@@ -21,7 +22,7 @@ export function GuaranteePage() {
 
   function confirmVerification() {
     setStatus('processing');
-    setTimeout(() => setStatus('frozen'), 1500);
+    setTimeout(() => setStatus('frozen'), paced(1500));
   }
 
   // AR Interaction Contract: 完成驗證 while the form is up, nothing while the

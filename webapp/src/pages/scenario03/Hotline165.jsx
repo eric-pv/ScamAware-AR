@@ -7,7 +7,7 @@ import { useARInteraction } from '../../lib/arInteraction';
 import { getOrCreateScenarioSession } from '../../lib/session/ScenarioSessionFactory';
 import { buildScenario03Script } from '../../data/scenario03Dialogues';
 import { getScenario03Strings } from './i18n';
-import { usePaceMultiplier } from '../../lib/scenario03Store';
+import { usePaceMultiplier } from '../../lib/experiencePace';
 
 // 撥打 165 查證 - the one call in this scenario the player is right to make.
 //

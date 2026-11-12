@@ -11,6 +11,7 @@ import { getSellerName } from '../../data/scenario05Characters';
 import { FAKE_TRADE_SITE_BRAND, FAKE_TRADE_SITE_DOMAIN } from '../../data/scenario05FakeSite';
 import { useT, useScenario05Lang } from './i18n';
 import { useARInteraction } from '../../lib/arInteraction';
+import { paced } from '../../lib/experiencePace';
 
 // Screen S05 - SafeDeal（假交易網站）・建立賣場.
 //
@@ -49,8 +50,8 @@ export function ShopCreate() {
   function submit() {
     if (phase !== 'idle') return;
     setPhase('loading');
-    setTimeout(() => setPhase('success'), 400);
-    setTimeout(() => navigate('/scenario05-atm/chat', { replace: true }), 900);
+    setTimeout(() => setPhase('success'), paced(400));
+    setTimeout(() => navigate('/scenario05-atm/chat', { replace: true }), paced(900));
   }
 
   // AR Interaction Contract: one story action - 建立交易 - and it stops being

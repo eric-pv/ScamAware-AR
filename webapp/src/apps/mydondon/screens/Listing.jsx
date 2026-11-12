@@ -6,6 +6,7 @@ import { MyDonDonBottomNav } from '../components/MyDonDonBottomNav';
 import { ProductPhoto } from '../components/ProductPhoto';
 import { MyDonDonPushNotice } from '../components/MyDonDonPushNotice';
 import { useT } from '../i18n';
+import { paced } from '../../../lib/experiencePace';
 
 // Screen S02 - MyDonDon 買東東・刊登成功貼文＋訊息通知.
 //
@@ -38,7 +39,7 @@ export function Listing({ listing, seller, incomingMessage, onOpenConversation, 
 
   useEffect(() => {
     if (!listing || !incomingMessage) return undefined;
-    const timer = setTimeout(() => setShowNotif(true), NOTICE_DELAY_MS);
+    const timer = setTimeout(() => setShowNotif(true), paced(NOTICE_DELAY_MS));
     return () => clearTimeout(timer);
   }, [listing, incomingMessage]);
 
@@ -46,7 +47,7 @@ export function Listing({ listing, seller, incomingMessage, onOpenConversation, 
   // then hands over on its own.
   useEffect(() => {
     if (!showNotif) return undefined;
-    const timer = setTimeout(() => onOpenConversation?.(), NOTICE_SLIDE_MS + NOTICE_HOLD_MS);
+    const timer = setTimeout(() => onOpenConversation?.(), NOTICE_SLIDE_MS + paced(NOTICE_HOLD_MS));
     return () => clearTimeout(timer);
   }, [showNotif, onOpenConversation]);
 
